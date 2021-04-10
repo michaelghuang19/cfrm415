@@ -22,16 +22,34 @@ Find the accumulated value of \$100 at the end of 20 years:
 
 \subsection*{(a)}
 
-If the annual interest rate is 6\% simple interest \\
-\framebox[1.1\width]{\textbf{answer}}
+At an annual interest rate of 6\% simple interest, we use the formula \\
+$= A(1 + rt)$ \\
+$= 100 \cdot (1 + 0.06 \cdot 20)$ \\ 
+$= 100 \cdot (1 + 1.2)$ \\
+$= 100 \cdot 2.2$ \\ 
+$= $ \framebox[1.1\width]{\textbf{\$220}}
 
 \subsection*{(b)}
 
-If the annual interest rate is 6\% compounded quarterly \\
+At an annual interest rate of 6\% compounded quarterly, we can use the formula \\
+$= A \{(1 + \frac{r}{m})^m\}^{\frac{k}{m}}$ \\
+$= 100 \cdot \{(1 + \frac{0.06}{4})^4\}^{\frac{4 \cdot 20}{4}}$ \\
+$= 100 \cdot \{(1 + 0.015)^4\}^{20}$ \\
+$= 100 \cdot \{(1.015)^4\}^{20}$ \\
+$= 100 \cdot \{1.06136355062\}^{20}$ \\
+$= 100 \cdot \{1.06136355062\}^{20}$ \\
+$= 100 \cdot 3.29066278668 $ \\
+$= 329.066278668 = $ \framebox[1.1\width]{\textbf{$\sim$\$329.07}}
 
 \subsection*{(c)}
 
-If the annual interest rate is 6\% compounded continuously \\
+At an annual interest rate of 6\% compounded continuously, we can use the formula \\
+$= (Ae^{r})^{\frac{k}{m}} $ \\
+$= Ae^{rt} $ \\
+$= 100 \cdot e^{0.06 \cdot 20} $ \\
+$= 100 \cdot e^{1.2} $ \\
+$= 100 \cdot 3.32011692274 $ \\
+$= 332.011692274  = $ \framebox[1.1\width]{\textbf{$\sim$\$332.01}}
 
 }
 
@@ -42,16 +60,32 @@ Find the present value of \$100 to be paid in 20 years
 
 \subsection*{(a)}
 
-If the annual interest rate is 2\% simple interest \\
-\framebox[1.1\width]{\textbf{answer}}
+At an annual interest rate of 2\% simple interest, we use the formula \\
+$PV = \frac{c}{1 + rt}$ \\
+$PV = \frac{100}{1 + 0.02 \cdot 20}$ \\
+$PV = \frac{100}{1 + 0.4}$ \\
+$PV = \frac{100}{1.4}$ \\
+$PV = 71.4285714286 = $ \framebox[1.1\width]{\textbf{$\sim$\$71.43}}
 
 \subsection*{(b)}
 
-If the annual interest rate is 2\% compounded semiannually \\
+At an annual interest rate of 2\% compounded semiannually, we use the formula \\
+$PV = c \{(1 + \frac{r}{m})^m\}^{\frac{-k}{m}}$ \\
+$PV = 100 \{(1 + \frac{0.02}{2})^2\}^{\frac{-(2 \cdot 20)}{2}}$ \\
+$PV = 100 \cdot \{(1 + 0.01)^2\}^{-20}$ \\
+$PV = 100 \cdot \{(1.01)^2\}^{-20}$ \\
+$PV = 100 \cdot \{1.0201\}^{-20}$ \\
+$PV = 100 \cdot 0.67165313886$ \\
+$PV = 67.165313886$ = \framebox[1.1\width]{\textbf{$\sim$\$67.17}}
 
 \subsection*{(c)}
 
-If the annual interest rate is 2\% compounded continuously \\
+At an annual interest rate of 2\% compounded continuously, we use the formula \\
+$PV = ce^{-rt}$ \\
+$PV = 100 \cdot e^{-0.02 \cdot 20}$ \\
+$PV = 100 \cdot e^{-0.4}$ \\
+$PV = 100 \cdot 0.67032004603$ \\
+$PV = 67.032004603 = $ \framebox[1.1\width]{\textbf{$\sim$\$67.03}}
 
 }
 
@@ -62,19 +96,34 @@ Find the annual rate of interest at which the accumulated value of \$1000 at the
 
 \subsection*{(a)}
 
-If interest is compounded semiannually \\
-\framebox[1.1\width]{\textbf{answer}}
+If interest is compounded semiannually, we can use the formula and solve for $r$: \\
+$AV = A\{(1 + \frac{r}{m})^m\}^{\frac{k}{m}}$ \\
+$3000 = 1000 \cdot \{(1 + \frac{r}{2})^2\}^{\frac{2 \cdot 15}{2}}$ \\
+$3000 = 1000 \cdot \{(1 + \frac{r}{2})^2\}^{15}$ \\
+$3 = \{(1 + \frac{r}{2})^2\}^{15}$ \\
+$\sqrt[15]{3} = (1 + \frac{r}{2})^2$ \\
+$\sqrt{\sqrt[15]{3}} = 1 + \frac{r}{2}$ \\
+$1.03729919731 - 1 = \frac{r}{2}$ \\
+$0.03729919731 \cdot 2 = r$ \\
+$r = 0.07459839462 = $ \framebox[1.1\width]{\textbf{$\sim$7.46\%}}
 
 \subsection*{(b)}
 
-If interest is compounded continuously \\
+If interest is compounded continuously, we can use the formula and solve for $r$: \\
+$AV = Ae^{rt}$ \\
+$3000 = 1000 \cdot e^{r \cdot 15}$ \\
+$3 = e^{r \cdot 15}$ \\
+$ln(3) = r \cdot 15$ \\
+$r = ln(3) \div 15 = 1.09861228867 \div 15 = 0.07324081924 = $ \framebox[1.1\width]{\textbf{$\sim$7.32\%}}
 
 }
 
 \section*{4.}
 {\Large 
 
-A dealer of questionable repute prices a used car at \$10,000, and it offers a four-year loan at 18\% compounded monthly, where the customer must pay \$250 per month. How much will the down payment be?
+A dealer of questionable repute prices a used car at \$10,000, and it offers a four-year loan at 18\% compounded monthly, where the customer must pay \$250 per month. How much will the down payment be? \\
+
+
 
 }
 
@@ -85,12 +134,22 @@ A junk bond pays a semiannual coupon at an 8\% annual with 5 years to maturity, 
 
 \subsection*{(a)}
 
-Calculate the bond price \\
-\framebox[1.1\width]{\textbf{answer}}
+To calculate the bond price, we use the following formula \\
+$P = c \sum_{k=1}^{n} v^k + Fv^n$ \\
+$P = c \sum_{k=1}^{n} (1 + \frac{r}{m})^{-k} + Fv^n$ \\
+$P = c \sum_{k=1}^{2 \cdot 5} (1 + \frac{0.02}{2})^{-k} + Fv^{2 \cdot 5}$ \\
+$P = c \sum_{k=1}^{10} (1.01)^{-k} + Fv^{10}$ \\ 
+$P = (5000 \cdot 0.08 \div 2) \cdot 1.01^{-1} \cdot \frac{1 - 1.01^{-10}}{1 - 1.01^{-1}} + F(1.01)^{-10}$ \\
+$P = 200 \cdot 0.9900990099 \cdot \frac{1 - 0.90528695469}{1 - 0.9900990099} + 5000 \cdot 0.90528695469$ \\
+$P = 200 \cdot 0.9900990099 \cdot \frac{0.09471304531}{0.0099009901} + 5000 \cdot 0.90528695469$ \\
+$P = 200 \cdot 0.9900990099 \cdot 9.56601757535 + 5000 \cdot 0.90528695469$
+$P = 1894.26090601 + 4526.43477345$ \\
+$P = 6420.69567946 = $ \framebox[1.1\width]{\textbf{$\sim$\$6420.70}}
 
 \subsection*{(b)}
 
-Calculate the Macaulay Duration of the bond \\
+To calculate the Macaulay Duration of the bond, we use the following formula: \\
+$= $ \framebox[1.1\width]{\textbf{answer}}
 
 \subsection*{(c)}
 
