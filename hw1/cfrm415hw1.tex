@@ -122,8 +122,14 @@ $r = ln(3) \div 15 = 1.09861228867 \div 15 = 0.07324081924 = $ \framebox[1.1\wid
 {\Large 
 
 A dealer of questionable repute prices a used car at \$10,000, and it offers a four-year loan at 18\% compounded monthly, where the customer must pay \$250 per month. How much will the down payment be? \\
-
-
+We calculate the down payment by taking the difference between the total monthly loan payments (Total = $250 \cdot 4 \cdot 12 = \text{\$}12000$) and the loan total overall. \\
+We can find the loan total to be \\
+$= A \{(1 + \frac{r}{m})^m\}^{\frac{k}{m}}$ \\
+$= 10000 \cdot \{(1 + \frac{0.18}{12})^12\}^{\frac{4 \cdot 12}{12}}$ \\
+$= 10000 \cdot 1.19561817146^4$ \\
+$= 10000 \cdot 2.0434782893$ \\
+$= 20434.782893 = \sim 20434.78$  \\
+We can then find the down payment to be $20434.78 - 12000 = $ \framebox[1.1\width]{\textbf{$\sim$\$8434.78}}
 
 }
 
@@ -149,11 +155,27 @@ $P = 6420.69567946 = $ \framebox[1.1\width]{\textbf{$\sim$\$6420.70}}
 \subsection*{(b)}
 
 To calculate the Macaulay Duration of the bond, we use the following formula: \\
-$= $ \framebox[1.1\width]{\textbf{answer}}
+$= \frac{c \sum_{k=1}^{n} (\frac{k}{m}) v^k + (\frac{n}{m})Fv^n}{P}$ \\
+$= \frac{(5000 \cdot 0.08 \div 2) \sum_{k=1}^{2 \cdot 5} (\frac{k}{2}) v^k + (\frac{2 \cdot 5}{2})5000v^{2 \cdot 5}}{6420.70}$ \\
+$= \frac{200 \sum_{k=1}^{10} (\frac{k}{2}) (1 + \frac{r}{m})^{-k} + 25000\cdot {(1 + \frac{r}{m})}^{-10}}{6420.70}$ \\
+$= \frac{200 \sum_{k=1}^{10} (\frac{k}{2}) (1 + \frac{0.02}{2})^{-k} + 25000 \cdot {(1 + \frac{0.02}{2})}^{-10}}{6420.70}$ \\
+$= \frac{200 \sum_{k=1}^{10} (\frac{k}{2}) (1.01)^{-k} + 25000 \cdot (1.01)^{-10}}{6420.70}$ \\
+$= \frac{200 \sum_{k=1}^{10} (\frac{k}{2}) (1.01)^{-k} + 25000 \cdot (1.01)^{-10}}{6420.70}$ \\
+$= \frac{200 \cdot 25.65740 + 25000 \cdot 0.90528695469}{6420.70}$ \\
+$= \frac{5131.48 + 22632.1738672}{6420.70}$ \\
+$= \frac{27763.6538672}{6420.70} = $ \framebox[1.1\width]{\textbf{$\sim$4.32408520367}}
 
 \subsection*{(c)}
 
-The market yield jumps to 2.02\%. What is the approximate change in the bond price? \\
+If the market yield jumps to 2.02\%, to determine the approximate change in bond price, we can use the following formula: \\
+$\Delta P \cong -P D_M \Delta r$ \\
+$\Delta P \cong -P Dv \Delta r$ \\
+$\Delta P \cong -6420.70 \cdot 4.32 \cdot (1 + \frac{r}{m})^{-1} \cdot (0.0202 - 0.02)$ \\
+$\Delta P \cong -6420.70 \cdot 4.32 \cdot (1 + \frac{0.02}{2})^{-1} \cdot (0.0202 - 0.02)$ \\
+$\Delta P \cong -6420.70 \cdot 4.32 \cdot (1.01)^{-1} \cdot (0.0202 - 0.02)$ \\
+$\Delta P \cong -6420.70 \cdot 4.32 \cdot 0.9900990099 \cdot 0.0002$ \\
+$\Delta P \cong -6420.70 \cdot 4.32 \cdot 0.9900990099 \cdot 0.0002$ \\
+$= -5.49255920792 = $\framebox[1.1\width]{\textbf{$\sim$\$-5.49}}
 
 }
 
@@ -162,12 +184,30 @@ The market yield jumps to 2.02\%. What is the approximate change in the bond pri
 
 A 10-year bond paying a semiannual coupon of 3.5\% has been issued and is trading in the market. It has a face value of \$5000 and matures in two years and two months. The market yield is 1.3\%. Calculate the bond price. \\
 
+To calculate the bond price, we use the following formula, and take into account that there are only effectively 2 payments per year left over the remaining 2 years: \\ 
+$P = c \sum_{k=1}^{n} v^k + Fv^n$ \\
+$P = (5000 \cdot 0.035 \div 2) \sum_{k=1}^{n} (1 + \frac{r}{m})^{-k} + 5000 \cdot (1 + \frac{r}{m})^{-n}$ \\
+$P = 87.5 \cdot \sum_{k=1}^{2 \cdot 2} (1 + \frac{0.013}{2})^{-k} + 5000 \cdot (1 + \frac{0.013}{2})^{-2 \cdot 2}$ \\
+$P = 87.5 \cdot \sum_{k=1}^{4} (1.0065)^{-k} + 5000 \cdot (1.0065)^{-4}$ \\
+$P = 87.5 \cdot 1.0065^{-1} \cdot \frac{1 - 1.0065^{-4}}{1 - 1.0065^{-1}} + 5000 \cdot 0.97441706933$ \\
+$P = 87.5 \cdot 0.99354197714 \cdot \frac{1 - 0.97441706933}{1 - 0.99354197714} + 5000 \cdot 0.97441706933$ \\
+$P = 87.5 \cdot 0.99354197714 \cdot \frac{0.02558293067}{0.00645802286} + 5000 \cdot 0.97441706933$ \\
+$P = 344.385604715 + 4872.08534665$ \\ 
+$P = 5216.47095137 = $ \framebox[1.1\width]{\textbf{$\sim$\$5216.47}}
+
 }
 
 \section*{7.}
 {\Large 
 
-Show that the modified duration of a continuously compounded zero coupon bond is equal to its time to maturity. \\
+We aim to show that the modified duration of a continuously compounded zero coupon bond is equal to its time to maturity, that is, $D_M = t$. We know that the modified duration is defined as $D_M = -\frac{1}{P}\frac{dP}{dr} $. \\
+For a continuously compounded zero coupon bond, its price is $P(0, t) = Fe^{-rt}$. Plugging this in gives us \\ 
+$D_M = -\frac{1}{P}\frac{dP}{dr} (Fe^{-rt})$ \\
+$D_M = -\frac{1}{P} \cdot Fe^{-rt} \cdot -t$ \\
+$D_M = \frac{Fe^{-rt} \cdot t}{P}$ \\
+$D_M = \frac{Fe^{-rt} \cdot t}{Fe^{-rt}}$ \\
+$D_M = t$ \\
+which is simply the time to maturity, as we aimed to show.
 
 }
 
