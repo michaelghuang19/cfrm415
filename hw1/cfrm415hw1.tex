@@ -120,15 +120,14 @@ $r = ln(3) \div 15 = 1.09861228867 \div 15 = 0.07324081924 = $ \framebox[1.1\wid
 
 \section*{4.}
 {\Large 
-% tbd 
-We calculate the down payment by taking the difference between the total monthly loan payments (Total = $250 \cdot 4 \cdot 12 = \text{\$}12000$) and the loan total overall. \\
-We can find the loan total to be \\
-$= A \{(1 + \frac{r}{m})^m\}^{\frac{k}{m}}$ \\
-$= 10000 \cdot \{(1 + \frac{0.18}{12})^{12}\}^{\frac{4 \cdot 12}{12}}$ \\
-$= 10000 \cdot 1.19561817146^4$ \\
-$= 10000 \cdot 2.0434782893$ \\
-$= 20434.782893 $= $\sim 20434.78$  \\
-We can then find the down payment to be $20434.78 - 12000 = $ \framebox[1.1\width]{\textbf{$\sim$\$8434.78}}
+
+We calculate the down payment by taking the difference between the present value of the loan payments and the total loan for 10000. In other words, we have that \\
+$PV = 10000 = \text{Down Payment} + \text{Monthly Payment Sum}$ \\
+We can then solve: \\
+$10000 = DP + \frac{250}{\frac{0.18}{12}} \cdot (1 - \frac{1}{(1 + \frac{0.18}{12})^{4 \cdot 12}})$ \\
+$10000 = DP + 16666.6666667 \cdot (1 - \frac{1}{(1.015)^{48}})$ \\
+$10000 = DP + 16666.6666667 \cdot 0.51063830469$ \\
+$DP = 10000 - 8510.63841152 = 1489.36158848 = $ \framebox[1.1\width]{\textbf{$\sim$\$1489.36}}
 
 }
 
@@ -180,17 +179,16 @@ $= -5.49255920792 = $\framebox[1.1\width]{\textbf{$\sim$\$-5.49}}
 
 \section*{6.}
 {\Large 
-% tbd: starting date
-To calculate the bond price, we use the following formula, and take into account that there are only effectively 2 payments per year left over the remaining 2 years: \\ 
+
+To calculate the bond price, we use the following formula, and use year-fractions to take into account that there are only effectively 2 payments per year left over the remaining 2 years, and a payment directly 2 months after we buy the bond: \\ 
 $P = c \sum_{k=1}^{n} v^k + Fv^n$ \\
 $P = (5000 \cdot 0.035 \div 2) \sum_{k=1}^{n} (1 + \frac{r}{m})^{-k} + 5000 \cdot (1 + \frac{r}{m})^{-n}$ \\
-$P = 87.5 \cdot \sum_{k=1}^{2 \cdot 2} (1 + \frac{0.013}{2})^{-k} + 5000 \cdot (1 + \frac{0.013}{2})^{-2 \cdot 2}$ \\
-$P = 87.5 \cdot \sum_{k=1}^{4} (1.0065)^{-k} + 5000 \cdot (1.0065)^{-4}$ \\
-$P = 87.5 \cdot 1.0065^{-1} \cdot \frac{1 - 1.0065^{-4}}{1 - 1.0065^{-1}} + 5000 \cdot 0.97441706933$ \\
-$P = 87.5 \cdot 0.99354197714 \cdot \frac{1 - 0.97441706933}{1 - 0.99354197714} + 5000 \cdot 0.97441706933$ \\
-$P = 87.5 \cdot 0.99354197714 \cdot \frac{0.02558293067}{0.00645802286} + 5000 \cdot 0.97441706933$ \\
-$P = 344.385604715 + 4872.08534665$ \\ 
-$P = 5216.47095137 = $ \framebox[1.1\width]{\textbf{$\sim$\$5216.47}}
+We adjust the sum to take into account the year-fraction and semiannual payment (i.e. 2 months = $\frac{1}{3}$ due to semiannual payments rather than $\frac{1}{6}$): \\
+$P = 87.5 \cdot \sum_{k=\frac{1}{3}}^{2 \cdot 2 + \frac{1}{3}} (1 + \frac{0.013}{2})^{-k} + 5000 \cdot (1 + \frac{0.013}{2})^{-(2 \cdot 2 + \frac{1}{3})}$  \\
+$P = 87.5 \cdot \sum_{k=0}^{4} (1.0065)^{-(k + \frac{1}{3})} + 5000 \cdot (1.0065)^{-\frac{13}{3}}$ \\
+$P $ = 87.3112340635 + 86.7473761188 + 86.1871595815 + 85.6305609354 + 85.0775568161 + 4861.57467521 \\ 
+$P = 5292.5285627253 = $ \framebox[1.1\width]{\textbf{$\sim$\$5292.53}}
+
 
 }
 
