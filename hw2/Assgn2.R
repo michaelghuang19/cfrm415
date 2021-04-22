@@ -52,23 +52,26 @@ solve_q4 <- function() {
 solve_q5 <- function() {
   
   data <- read.csv(paste(wd, "/", data_filename, ".csv", sep = ""))
-  return_data <- data[2:ncol(data)]
+  returns_data <- data[2:ncol(data)]
   
   # a) Calculate the covariance matrix of the returns
-  D <- cov()
-  
+  D <- cov(returns_data)
   
   
   A <- matrix(data = 1, nrow = 1, ncol = nrow(D))
-  lapply(data[])
-  A <- rbind(A, )
+  means <- lapply(returns_data, mean)
+  A <- rbind(A, means)
   
   # b) Find the optimizing weights for the global minimizing variance portfolio.  Also, calculate the annualized return and volatility (remember that volatility is the square root of the variance)
   
+  solve.QP(Dmat=D, dvec=rep(0, nrow(D)), Amat=t(A), bvec=b0, meq = 2)
+  
+  # annualized, so need to multiply the 4 months by 3
+  # variance 1 / (1^T \sigma^-1 1)
+  # volatility = sqrt variance
+  
   # c) Find the weights that minimize the portfolio variance for the case where the target monthly portfolio return is 1%. Also, calculate the annualized volatility
   
-  # D = sigma, the covariance matrix
-  # solve.QP(meq = 2)
 }
 
 ### "Main" ###
