@@ -13,15 +13,31 @@ setwd("~/uw20.21/2021.4/cfrm415/cfrm-homework/cfrm415/hw2")
 # C
 thirty_360_eur <- function(d1, d2) {
   
+  day_diff = max(30 - day(d1), 0) + min(day(d2), 30)
+  year_diff = 360 * (year(d2) - year(d1))
+  month_diff = 30 * (month(d2) - month(d1) - 1)
   
+  return ((day_diff + year_diff + month_diff) / 360)
 }
 
 solve_q4 <- function() {
-  # a) d1 = 2020.10.15, d2 = 2021.04.15
-  # b) d1 = 2017.10.26, d2 = 2018.08.20 
   
-  # Use the ymd(.) lubridate function to create the lubridate objects
-  # ymd(20210401) returns a lubridate object representing the date 2021.04.01.  Also, the year, month, and day in each lubridate object obj can be accessed with the functions year(obj), month(obj), and day(obj) respectively.  
+  print("Sanity test example from lecture")
+  print(thirty_360_eur(ymd(20000104), ymd(20000704)))
+  # expected: 0.5
+  
+  print("4a.")
+  d1 = ymd(20201015)
+  d2 = ymd(20210415)
+  print(thirty_360_eur(d1, d2))
+  # output: 0.5
+  
+  print("4b.")
+  d1 = ymd(20171026)
+  d2 = ymd(20180820)
+  print(thirty_360_eur(d1, d2))
+  # output: 0.8166667
+  
 }
 
 ### Question 5 ###
@@ -33,3 +49,6 @@ solve_q5 <- function() {
   # c) Find the weights that minimize the portfolio variance for the case where the target monthly portfolio return is 1%.  Also, calculate the annualized volatility
   
 }
+
+solve_q4()
+solve_q5()
