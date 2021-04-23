@@ -28,10 +28,6 @@ thirty_360_eur <- function(d1, d2) {
 }
 
 solve_q4 <- function() {
-  print("Sanity test example from lecture")
-  print(thirty_360_eur(ymd(20000104), ymd(20000704)))
-  # expected: 0.5
-  
   print("4a.")
   d1 <- ymd(20201015)
   d2 <- ymd(20210415)
@@ -48,58 +44,59 @@ solve_q4 <- function() {
 
 ### Question 5 ###
 
-find_gmvp <- function() {
-
-}
-
-find_mvp <- function() {
-
-}
-
 solve_q5 <- function() {
   
   # load data
   data <- read.csv(paste(wd, "/", data_filename, ".csv", sep = ""))
   returns_data <- data[2:ncol(data)]
   
+  # a) Calculate the covariance matrix of the returns
   print("5a")
+  
   D <- cov(returns_data)
   print(D)
-  
-  # expected w
-  ones = matrix(1, ncol(D))
-  print("expected weights")
-  print((inv(D) %*% ones) / (t(ones) %*% inv(D) %*% ones)[[1]])
   
   # b) Find the optimizing weights for the global minimizing variance portfolio.  Also, calculate the annualized return and volatility (remember that volatility is the square root of the variance)
   
   print("5b")
-  A <- matrix(data = 1, nrow = 1, ncol = nrow(D))
-  means <- lapply(returns_data, mean)
-  A <- rbind(A, means)
-
-  # not sure if this is right
-  b0 = c(1, 0)
   
-  gmvp <- solve.QP(Dmat=D, dvec=rep(0, nrow(D)), Amat=t(A), bvec=b0, meq = 2)
-  print(gmvp)
+  means <- lapply(returns_data, mean)
+  ones <- matrix(1, ncol(D))
+  A <- matrix(data = 1, nrow = 1, ncol = nrow(D))
+  b0 <- c(1)
+  
+  gmvp <- solve.QP(Dmat=D, dvec=rep(0, nrow(D)), Amat=t(A), bvec=b0, meq = 1)
   
   # variance 1 / (1^T \sigma^-1 1)
-  variance = 1 / (t(ones) %*% inv(D) %*% ones)[[1]]
-  volatility = sqrt(variance)
+  returns <- t(as.matrix(unlist(means))) %*% as.matrix(unlist(gmvp$solution))
+  variance <- 1 / (t(ones) %*% inv(D) %*% ones)[[1]]
+  volatility <- sqrt(variance)
   # annualized, so need to multiply the 4 months by 3?
-  print(paste("annualized returns: ", gmvp$value * 3))
+  print(paste("optimizing weights for gmvp: ", gmvp$solution))
+  print(paste("annualized returns: ", returns * 3))
   print(paste("annualized volatility: ", volatility * 3))
   
   
   # c) Find the weights that minimize the portfolio variance for the case where the target monthly portfolio return is 1%. Also, calculate the annualized volatility
   print("5c")
+    
+  A <- rbind(A, means)
+  # this is 1% across the 4 months, which is wrong
+  b0 = c(1, 0.01)
   
+  one_pct <- solve.QP(Dmat=D, dvec=rep(0, nrow(D)), Amat=t(A), bvec=b0, meq = 2)
   
-
+  variance <- D %*% one_pct$solution
+  print(variance)
+  variance <- 1 / (t(ones) %*% inv(D) %*% ones)[[1]]
+  print(variance)
+  volatility <- sqrt(variance)
+  # again annualized, so need to multiply the 4 months by 3?
+  print(paste("weights for 1% target return: ", one_pct$solution))
+  print(paste("annualized volatility: ", volatility * 3))
 }
 
 ### "Main" ###
 
-# solve_q4()
+solve_q4()
 solve_q5()
