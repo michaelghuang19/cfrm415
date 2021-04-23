@@ -18,13 +18,111 @@
 \section*{1.}
 {\Large 
 
-Given a portfolio of three securities with covariances of returns in a matrix $\sigma$, where the sum of the portfolio weights $\omega_1, \omega_2, \omega_3$ is 1, show that the matrix form for the gradient of the Lagrangian for the Markowitz global minimum variance portfolio object function \\
-$\frac{1}{2}\omega^T \sigma \omega$ \\
-is \\
-$\sigma\omega + \lambda1 = 0$ \\
-where $\omega$ is the vector containing the portfolio weights. \\ \\ 
+We optimize using \\
+$\underset{\omega_1, \omega_2, \omega_3}{\text{min}} \frac{1}{2}\omega^T \Sigma \omega$ \\
+s.t. $\omega_1 + \omega_2 + \omega_3 = 1$, or $\omega^T 1 = 1$ \\ \\
+We know that to the Langrangian will be in the form \\
+$\mathcal{L} (\omega, \lambda) = \frac{1}{2}\omega^T \Sigma \omega - \lambda (\omega^T 1 - 1)$ \\ \\
+% for which we take the gradient to get \\
+% $\nabla_\omega \mathcal{L} (\omega, \lambda) = \Sigma \omega + \lambda 1 = 0$
+In matrix form, we can depict the first term as follows: \\
+$\frac{1}{2}$
+$\cdot$
+$\begin{bmatrix}
+  \omega_1 & \omega_2 & \omega_3
+\end{bmatrix}$ 
+$\cdot$
+$\begin{bmatrix}
+  \sigma_1^2 & \sigma_{12} & \sigma_{13} \\
+  \sigma_{12} & \sigma_2^2 & \sigma_{23} \\
+  \sigma_{13} & \sigma_{23} & \sigma_3^2 \\
+\end{bmatrix}$
+$\cdot$
+$\begin{bmatrix}
+  \omega_1 \\
+  \omega_2 \\
+  \omega_3 \\
+\end{bmatrix}$ \\
+$= \frac{1}{2}$
+$\cdot$
+$\begin{bmatrix}
+  \omega_1 \sigma_1^2 + \omega_2 \sigma_{12} + \omega_3 \sigma_{13} & \omega_1 \sigma_{12} + \omega_2 \sigma_2^2 + \omega_3 \sigma_{23} & \omega_1 \sigma_{13} + \omega_2 \sigma_{23} + \omega_3 \sigma_3^2
+\end{bmatrix}$
+$\cdot$
+$\begin{bmatrix}
+  \omega_1 \\
+  \omega_2 \\
+  \omega_3 \\
+\end{bmatrix}$ \\
+$= \frac{1}{2}$
+$\cdot$
+$\begin{bmatrix}
+\omega_1^2 \sigma_1^2 
+  + \omega_2^2 \sigma_2^2 
+  + \omega_3^2 \sigma_3^2 
+  + 2 \omega_1 \omega_2 \sigma_{12} 
+  + 2 \omega_1 \omega_3 \sigma_{13} 
+  + 2 \omega_2 \omega_3 \sigma_{23}
+\end{bmatrix}$ \\ 
+and the latter term as follows: \\
+$\lambda \cdot ($
+$\begin{bmatrix}
+  \omega_1 & \omega_2 & \omega_3
+\end{bmatrix}$
+$\cdot$ 
+$\begin{bmatrix}
+  1 \\
+  1 \\
+  1 \\
+\end{bmatrix}$
+$- 1)$ \\ \\
 
-We use the optimization
+We take the gradient of the entire thing: \\
+$\nabla \omega [\frac{1}{2}$
+$\cdot$
+$\begin{bmatrix}
+\omega_1^2 \sigma_1^2 
+  + \omega_2^2 \sigma_2^2 
+  + \omega_3^2 \sigma_3^2 
+  + 2 \omega_1 \omega_2 \sigma_{12} 
+  + 2 \omega_1 \omega_3 \sigma_{13} 
+  + 2 \omega_2 \omega_3 \sigma_{23})
+\end{bmatrix}$
+$+ \lambda (\omega^T1 - 1]$ \\ 
+$= \frac{1}{2}$
+$\cdot$
+$\begin{bmatrix}
+2 \omega_1 \sigma_1^2 
+  + 2 \omega_2 \sigma_2^2 
+  + 2 \omega_3 \sigma_3^2 
+  + 2 \omega_1 \sigma_{12} 
+  + 2 \omega_2 \sigma_{12} 
+  + 2 \omega_1 \sigma_{13} 
+  + 2 \omega_3 \sigma_{13} 
+  + 2 \omega_2 \sigma_{23}
+  + 2 \omega_3 \sigma_{23}
+\end{bmatrix}$
+$+ \lambda^T1$ \\ 
+$= 
+\begin{bmatrix}
+  \omega_1 \sigma_1^2 
+  + \omega_2 \sigma_2^2 
+  + \omega_3 \sigma_3^2 
+  + \omega_1 \sigma_{12} 
+  + \omega_2 \sigma_{12} 
+  + \omega_1 \sigma_{13} 
+  + \omega_3 \sigma_{13} 
+  + \omega_2 \sigma_{23}
+  + \omega_3 \sigma_{23}
+\end{bmatrix}$ 
+$+ \lambda^T1$ \\ \\
+
+More simply: \\
+$0 = \nabla_{\omega} [\frac{1}{2}\omega^T \Sigma \omega - \lambda (\omega^T 1 - 1)]$ \\
+$0 = \frac{1}{2}(\Sigma \omega + \omega^T \Sigma) - \lambda 1$ \\
+$0 = \frac{1}{2}(\Sigma \omega + \Sigma\omega) - \lambda 1$ \\
+$0 = \frac{1}{2}(2 \Sigma \omega) - \lambda 1$ \\
+$0 = \Sigma \omega - \lambda 1$
 
 \framebox[1.1\width]{\textbf{answer}}
 

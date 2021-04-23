@@ -65,11 +65,10 @@ solve_q5 <- function() {
   print("5a")
   D <- cov(returns_data)
   print(D)
-  D = 2 * D
-  D
   
   # expected w
   ones = matrix(1, ncol(D))
+  print("expected weights")
   print((inv(D) %*% ones) / (t(ones) %*% inv(D) %*% ones)[[1]])
   
   # b) Find the optimizing weights for the global minimizing variance portfolio.  Also, calculate the annualized return and volatility (remember that volatility is the square root of the variance)
@@ -81,17 +80,16 @@ solve_q5 <- function() {
 
   # not sure if this is right
   b0 = c(1, 0)
-  # b0 = c(1, 0)
   
   gmvp <- solve.QP(Dmat=D, dvec=rep(0, nrow(D)), Amat=t(A), bvec=b0, meq = 2)
   print(gmvp)
   
   # variance 1 / (1^T \sigma^-1 1)
-  variance = 1 / (t(ones) %*% inv(D))[[1]]
+  variance = 1 / (t(ones) %*% inv(D) %*% ones)[[1]]
   volatility = sqrt(variance)
   # annualized, so need to multiply the 4 months by 3?
-  print(gmvp$value * 3)
-  print(volatility * 3)
+  print(paste("annualized returns: ", gmvp$value * 3))
+  print(paste("annualized volatility: ", volatility * 3))
   
   
   # c) Find the weights that minimize the portfolio variance for the case where the target monthly portfolio return is 1%. Also, calculate the annualized volatility
