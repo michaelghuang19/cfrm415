@@ -124,8 +124,6 @@ $0 = \frac{1}{2}(\Sigma \omega + \Sigma\omega) - \lambda 1$ \\
 $0 = \frac{1}{2}(2 \Sigma \omega) - \lambda 1$ \\
 $0 = \Sigma \omega - \lambda 1$
 
-\framebox[1.1\width]{\textbf{answer}}
-
 }
 
 \section*{2.}
@@ -134,12 +132,22 @@ $0 = \Sigma \omega - \lambda 1$
 Given the result from problem 1 is true for any number of assets in a portfolio, and the constraint \\ 
 $\omega^T1 = 1$ \\
 show that the optimal weights for the global minimum variance portfolio are \\ 
-$\omega^* = \frac{\sigma^{-1}1}{1^T\sigma^{-1}1}$ \\
+$\omega^* = \frac{\Sigma^{-1}1}{1^T\Sigma^{-1}1}$ \\
 That is, show this using matrix algebra, and not individual elements as done in problem 1. You may find the identity $(AB)^T = B^TA^T$ useful, for two square $k \times k$ matrices $A$ and $B$. \\ \\
 
-Interesting
-
-\framebox[1.1\width]{\textbf{answer}}
+We found in problem 1 that the matrix form is $\Sigma \omega + \lambda 1 = 0$. In other words, \\
+$\Sigma \omega = -\lambda1$ \\
+$\omega = -\lambda\Sigma^{-1}1$ \\ \\
+Our previous constraint was that $\omega^T 1 = 1$, which we can now re-form as \\
+$(-\lambda \Sigma^{-1} 1)^T 1 = 1$ \\
+$-\lambda 1^T {\Sigma^{-1}}^T 1 = 1$ \\
+$-\lambda = \frac{1}{1^T {\Sigma^{-1}}^T 1}$ \\
+$\lambda = -\frac{1}{1^T {\Sigma^{-1}}^T 1}$ \\ \\
+And plugging this back in, we can find that \\
+$\omega = -\Sigma^{-1}1 \cdot -\frac{1}{1^T {\Sigma^{-1}}^T 1}$ \\
+$\omega = -\frac{-\Sigma^{-1}1}{1^T {\Sigma^{-1}}^T 1}$ \\
+$\omega = \frac{-Sigma^{-1}1}{1^T {\Sigma^{-1}}^T 1}$ \\
+as we hoped to show.
 
 }
 
