@@ -129,13 +129,7 @@ $0 = \Sigma \omega - \lambda 1$
 \section*{2.}
 {\Large
 
-Given the result from problem 1 is true for any number of assets in a portfolio, and the constraint \\ 
-$\omega^T1 = 1$ \\
-show that the optimal weights for the global minimum variance portfolio are \\ 
-$\omega^* = \frac{\Sigma^{-1}1}{1^T\Sigma^{-1}1}$ \\
-That is, show this using matrix algebra, and not individual elements as done in problem 1. You may find the identity $(AB)^T = B^TA^T$ useful, for two square $k \times k$ matrices $A$ and $B$. \\ \\
-
-We found in problem 1 that the matrix form is $\Sigma \omega + \lambda 1 = 0$. In other words, \\
+We found in problem 1 that the matrix form for the optimizer is $\Sigma \omega + \lambda 1 = 0$. In other words, \\
 $\Sigma \omega = -\lambda1$ \\
 $\omega = -\lambda\Sigma^{-1}1$ \\
 $1^T\omega = -\lambda1^T\Sigma^{-1}1$ \\
@@ -145,7 +139,8 @@ $-\frac{1}{1^T\Sigma^{-1}1} = \lambda$ \\
 We can now re-susbstitute to find that \\ 
 $\omega = -\lambda\Sigma^{-1}1$ \\
 $\omega = -\frac{1}{1^T\Sigma^{-1}1} \cdot -\Sigma^{-1}1$ \\ 
-$\omega = \frac{\Sigma^{-1}1}{1^T\Sigma^{-1}1}$ \\
+$\omega = \frac{\Sigma^{-1}1}{1^T\Sigma^{-1}1}$, and due to the nature of the optimizer, we now have that \\
+$\omega^* = \frac{\Sigma^{-1}1}{1^T\Sigma^{-1}1}$ 
 % Our previous constraint was that $\omega^T 1 = 1$, which we can now re-form as \\
 % $(-\lambda \Sigma^{-1} 1)^T 1 = 1$ \\
 % $-\lambda 1^T {\Sigma^{-1}}^T 1 = 1$ \\
@@ -166,24 +161,15 @@ You are given the market term structure of interest rates as of today, date $t$,
 
 \subsection*{(a)}
 
-Write the expression for the present value of the stream of fixed interest payments as of today. \\ \\
-We know that the present value of the fixed leg over a period of $n$ payments is $S\sum_{i=1}^{n} \tau_i P(t, T_i)$ where we use $t$, instead of $T_0$ due to the nature of our trade. 
+We know that the present value of the fixed leg over a period of $n$ payments is $S\sum_{i=1}^{n} \tau_i P(t, T_i)$ where we use $t$, instead of $T_0$ due to the nature of our trade which starts before the start date. 
 
 \subsection*{(b)}
 
-Write the expression for the present value of the stream of floating interest payments as of today. \\ \\
-We know that the present value of the floating leg over a period of $n$ payments is $\sum_{i=1}^{n} \tau_i P(t, T_i)F(t; T_{i-1}, T_i)$ where we use $t$, instead of $T_0$ due to the nature of our trade. 
+We know that the present value of the floating leg over a period of $n$ payments is $\sum_{i=1}^{n} \tau_i P(t, T_i)F(t; T_{i-1}, T_i)$ where we use $t$, instead of $T_0$ due to the nature of our trade which starts before the start date. 
 
 \subsection*{(c)}
 
-Show that for this swap to be priced fairly, we must have \\
-$S = \frac{P(t, T_0) - P(t, T_n)}{\sum_{i=1}^{n}\tau_iP(t, T_i)}$ \\ 
-if the forward rate is represented by the simply-compounded spot interest rate; i.e., \\ 
-$F(t; T_{i-1}, T_i) = L(T_{i-1}, T_i) = \frac{1-P(T_{i-1}, T_i)}{\tau_iP(T_{i-1}, T_i)}$ \\ 
-Hint: Apply the computation method for a forward discount factor as shown at the top of Slide 10 in the 003 deck to $P(T_{i-1}, T_{i}))$ \\
-This tells us that $P(T_{i-1}, T_i) = P(0, T_i) / P(0, T_{i-1})$\\ \\ 
-
-We know that the present value of each leg must be equal at the start time. In other words, \\
+Using the hint in context tells us that $P(T_{i-1}, T_i) = P(0, T_i) / P(0, T_{i-1}) = P(t, T_i) / P(t, T_{i-1})$. We know that the present value of each leg must be equal at the start time. In other words, \\
 $S\sum_{i=1}^{n} \tau_i P(t, T_i) = \sum_{i=1}^{n} \tau_i P(t, T_i)F(t; T_{i-1}, T_i)$ \\ 
 $S\sum_{i=1}^{n} P(t, T_i) = \sum_{i=1}^{n} P(t, T_i)F(t; T_{i-1}, T_i)$ \\ 
 $S = \sum_{i=1}^{n} F(t; T_{i-1}, T_i)$ \\ 
