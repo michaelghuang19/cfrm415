@@ -187,9 +187,13 @@ We know that the present value of each leg must be equal at the start time. In o
 $S\sum_{i=1}^{n} \tau_i P(t, T_i) = \sum_{i=1}^{n} \tau_i P(t, T_i)F(t; T_{i-1}, T_i)$ \\ 
 $S\sum_{i=1}^{n} P(t, T_i) = \sum_{i=1}^{n} P(t, T_i)F(t; T_{i-1}, T_i)$ \\ 
 $S = \sum_{i=1}^{n} F(t; T_{i-1}, T_i)$ \\ 
-$S = \sum_{i=1}^{n} (1 - P(T_{i-1}, T_i) / (\tau_iP(T_{i-1}, T_i))$ \\ 
-$S = \sum_{i=1}^{n} (1 - \frac{P(0, T_i)}{P(0, T_{i-1})}) / (\tau_i \frac{P(0, T_i)}{P(0, T_{i-1})})$ \\ 
-$S = \sum_{i=1}^{n} (1 - \frac{P(0, T_i)}{P(0, T_{i-1})}) / (\tau_i \frac{P(0, T_i)}{P(0, T_{i-1})})$ \\ 
+$S = \sum_{i=1}^{n} [1 - P(T_{i-1}, T_i)] \div [\tau_iP(T_{i-1}, T_i)]$ \\ 
+$S = \sum_{i=1}^{n} [1 - \frac{P(t, T_i)}{P(t, T_{i-1})}] \div \tau_i \frac{P(t, T_i)}{P(t, T_{i-1})}$ \\ 
+$S = \sum_{i=1}^{n} [1 - \frac{P(t, T_i)}{P(t, T_{i-1})}] \div \tau_i \frac{P(t, T_i)}{P(t, T_{i-1})} \cdot \frac{P(t, T_{i-1})}{P(t, T_{i-1})}$ \\ 
+$S = \sum_{i=1}^{n} [P(t, T_{i-1}) - P(t, T_i)] \div \tau_i P(t, T_i)  $ \\ 
+$S = \frac{P(t, T_0) - P(t, 1) + P(t, 1) - \dots + P(t, T_n)}{\sum_{i=1}^{n} \tau_i P(t, T_i)}  $ \\ 
+$S = \frac{P(t, T_0) - P(t, T_n)}{\sum_{i=1}^{n} \tau_i P(t, T_i)} $ \\
+as we sought to show.
 
 }
 
