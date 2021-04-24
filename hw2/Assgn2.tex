@@ -157,12 +157,12 @@ $\Sigma \omega = -\lambda1$ \\
 $\omega = -\lambda\Sigma^{-1}1$ \\
 $1^T\omega = -\lambda1^T\Sigma^{-1}1$ \\
 $\omega^T1 = -\lambda1^T\Sigma^{-1}1$ \\
-$1 = -\lambda1^T\Sigma^{-1}1$ \\
+$1 = -\lambda1^T\Sigma^{-1}1$ \hfill By nature of our constraint \\
 $-\frac{1}{1^T\Sigma^{-1}1} = \lambda$ \\ 
-We can now re-susbstitute to find that \\ 
-$\omega = -\lambda\Sigma^{-1}1$ \\
+We can now re-susbstitute for $\lambda$ to find that \\ 
+$\omega = -\lambda \cdot \Sigma^{-1}1$ \\
 $\omega = -\frac{1}{1^T\Sigma^{-1}1} \cdot -\Sigma^{-1}1$ \\ 
-$\omega = \frac{\Sigma^{-1}1}{1^T\Sigma^{-1}1}$, and due to the nature of the optimizer, we now have that \\
+$\omega = \frac{\Sigma^{-1}1}{1^T\Sigma^{-1}1}$, and due to the nature of the optimizer, we now see that \\
 $\omega^* = \frac{\Sigma^{-1}1}{1^T\Sigma^{-1}1}$ 
 % Our previous constraint was that $\omega^T 1 = 1$, which we can now re-form as \\
 % $(-\lambda \Sigma^{-1} 1)^T 1 = 1$ \\
@@ -198,7 +198,7 @@ $S\sum_{i=1}^{n} P(t, T_i) = \sum_{i=1}^{n} P(t, T_i)F(t; T_{i-1}, T_i)$ \\
 $S = \sum_{i=1}^{n} F(t; T_{i-1}, T_i)$ \\ 
 $S = \sum_{i=1}^{n} [1 - P(T_{i-1}, T_i)] \div [\tau_iP(T_{i-1}, T_i)]$ \\ 
 $S = \sum_{i=1}^{n} [1 - \frac{P(t, T_i)}{P(t, T_{i-1})}] \div \tau_i \frac{P(t, T_i)}{P(t, T_{i-1})}$ \\ 
-$S = \sum_{i=1}^{n} [1 - \frac{P(t, T_i)}{P(t, T_{i-1})}] \div \tau_i \frac{P(t, T_i)}{P(t, T_{i-1})} \cdot \frac{P(t, T_{i-1})}{P(t, T_{i-1})}$ \\ 
+$S = \sum_{i=1}^{n} ([1 - \frac{P(t, T_i)}{P(t, T_{i-1})}] \div \tau_i \frac{P(t, T_i)}{P(t, T_{i-1})})\cdot \frac{P(t, T_{i-1})}{P(t, T_{i-1})}$ \hfill Multiplying by 1 \\ 
 $S = \sum_{i=1}^{n} [P(t, T_{i-1}) - P(t, T_i)] \div \tau_i P(t, T_i)  $ \\ 
 $S = \frac{P(t, T_0) - P(t, 1) + P(t, 1) - \dots + P(t, T_n)}{\sum_{i=1}^{n} \tau_i P(t, T_i)}  $ \\ 
 $S = \frac{P(t, T_0) - P(t, T_n)}{\sum_{i=1}^{n} \tau_i P(t, T_i)} $ \\
