@@ -21,11 +21,11 @@
 We optimize using \\
 $\underset{\omega_1, \omega_2, \omega_3}{\text{min}} \frac{1}{2}\omega^T \Sigma \omega$ \\
 s.t. $\omega_1 + \omega_2 + \omega_3 = 1$, or $\omega^T 1 = 1$ \\ \\
-We know that to the Langrangian will be in the form \\
-$\mathcal{L} (\omega, \lambda) = \frac{1}{2}\omega^T \Sigma \omega - \lambda (\omega^T 1 - 1)$ \\ \\
+We know that to the Langrangian will be in the form $\mathcal{L} (\omega, \lambda) = f(x) + \lambda g(x)$, for $g(x) = 0$. We have $f(x) = \frac{1}{2}\omega^T \Sigma \omega$ and $g(x) = \omega^T 1 = 1$, so we can effectively modify this equation to be
+$\mathcal{L} (\omega, \lambda) = \frac{1}{2}\omega^T \Sigma \omega + \lambda (\omega^T 1 - 1)$ \\ \\
 % for which we take the gradient to get \\
 % $\nabla_\omega \mathcal{L} (\omega, \lambda) = \Sigma \omega + \lambda 1 = 0$
-In matrix form, we can depict the first term as follows: \\
+In matrix form, we can this as follows: \\
 $\frac{1}{2}$
 $\cdot$
 $\begin{bmatrix}
@@ -42,87 +42,174 @@ $\begin{bmatrix}
   \omega_1 \\
   \omega_2 \\
   \omega_3 \\
-\end{bmatrix}$ \\
-$= \frac{1}{2}$
+\end{bmatrix}$ 
+$+ \lambda \cdot$ 
+$(\begin{bmatrix}
+  \omega_1 & \omega_2 & \omega_3
+\end{bmatrix}
+\cdot 
+\begin{bmatrix}
+  1 \\
+  1 \\
+  1 \\
+\end{bmatrix}
+- 1)$ \\ \\
+We can then take the gradient with respect to $\omega$ and set to 0: \\ \\
+$\nabla_\omega$ $\frac{1}{2}$
 $\cdot$
 $\begin{bmatrix}
-  \omega_1 \sigma_1^2 + \omega_2 \sigma_{12} + \omega_3 \sigma_{13} & \omega_1 \sigma_{12} + \omega_2 \sigma_2^2 + \omega_3 \sigma_{23} & \omega_1 \sigma_{13} + \omega_2 \sigma_{23} + \omega_3 \sigma_3^2
+  \omega_1 & \omega_2 & \omega_3
+\end{bmatrix}$ 
+$\cdot$
+$\begin{bmatrix}
+  \sigma_1^2 & \sigma_{12} & \sigma_{13} \\
+  \sigma_{12} & \sigma_2^2 & \sigma_{23} \\
+  \sigma_{13} & \sigma_{23} & \sigma_3^2 \\
 \end{bmatrix}$
 $\cdot$
 $\begin{bmatrix}
   \omega_1 \\
   \omega_2 \\
   \omega_3 \\
-\end{bmatrix}$ \\
-$= \frac{1}{2}$
+\end{bmatrix}$ 
+$+ \lambda \cdot$ 
+$(\begin{bmatrix}
+  \omega_1 & \omega_2 & \omega_3
+\end{bmatrix}
+\cdot 
+\begin{bmatrix}
+  1 \\
+  1 \\
+  1 \\
+\end{bmatrix}
+- 1)$ \\ \\
+$0 = \frac{1}{2}$
+$\cdot $
+$\begin{bmatrix}
+  1 & 0 & 0 \\
+  0 & 1 & 0 \\
+  0 & 0 & 1 \\
+\end{bmatrix}$ 
+$\cdot $
+$\begin{bmatrix}
+  \sigma_1^2 & \sigma_{12} & \sigma_{13} \\
+  \sigma_{12} & \sigma_2^2 & \sigma_{23} \\
+  \sigma_{13} & \sigma_{23} & \sigma_3^2 \\
+\end{bmatrix}$
 $\cdot$
 $\begin{bmatrix}
-\omega_1^2 \sigma_1^2 
-  + \omega_2^2 \sigma_2^2 
-  + \omega_3^2 \sigma_3^2 
-  + 2 \omega_1 \omega_2 \sigma_{12} 
-  + 2 \omega_1 \omega_3 \sigma_{13} 
-  + 2 \omega_2 \omega_3 \sigma_{23}
-\end{bmatrix}$ \\ 
-and the latter term as follows: \\
-$\lambda \cdot ($
+  \omega_1 \\
+  \omega_2 \\
+  \omega_3 \\
+\end{bmatrix}$
+$+$
+$\frac{1}{2}$
+$\cdot$
 $\begin{bmatrix}
   \omega_1 & \omega_2 & \omega_3
-\end{bmatrix}$
-$\cdot$ 
-$\begin{bmatrix}
-  1 \\
-  1 \\
-  1 \\
-\end{bmatrix}$
-$- 1)$ \\ \\
-
-We take the gradient of the entire thing: \\
-$\nabla \omega [\frac{1}{2}$
-$\cdot$
-$\begin{bmatrix}
-\omega_1^2 \sigma_1^2 
-  + \omega_2^2 \sigma_2^2 
-  + \omega_3^2 \sigma_3^2 
-  + 2 \omega_1 \omega_2 \sigma_{12} 
-  + 2 \omega_1 \omega_3 \sigma_{13} 
-  + 2 \omega_2 \omega_3 \sigma_{23})
-\end{bmatrix}$
-$+ \lambda (\omega^T1 - 1]$ \\ 
-$= \frac{1}{2}$
-$\cdot$
-$\begin{bmatrix}
-2 \omega_1 \sigma_1^2 
-  + 2 \omega_2 \sigma_2^2 
-  + 2 \omega_3 \sigma_3^2 
-  + 2 \omega_1 \sigma_{12} 
-  + 2 \omega_2 \sigma_{12} 
-  + 2 \omega_1 \sigma_{13} 
-  + 2 \omega_3 \sigma_{13} 
-  + 2 \omega_2 \sigma_{23}
-  + 2 \omega_3 \sigma_{23}
-\end{bmatrix}$
-$+ \lambda^T1$ \\ 
-$= 
-\begin{bmatrix}
-  \omega_1 \sigma_1^2 
-  + \omega_2 \sigma_2^2 
-  + \omega_3 \sigma_3^2 
-  + \omega_1 \sigma_{12} 
-  + \omega_2 \sigma_{12} 
-  + \omega_1 \sigma_{13} 
-  + \omega_3 \sigma_{13} 
-  + \omega_2 \sigma_{23}
-  + \omega_3 \sigma_{23}
 \end{bmatrix}$ 
-$+ \lambda^T1$ \\ \\
-
-More simply: \\
-$0 = \nabla_{\omega} [\frac{1}{2}\omega^T \Sigma \omega - \lambda (\omega^T 1 - 1)]$ \\
-$0 = \frac{1}{2}(\Sigma \omega + \omega^T \Sigma) - \lambda 1$ \\
-$0 = \frac{1}{2}(\Sigma \omega + \Sigma\omega) - \lambda 1$ \\
-$0 = \frac{1}{2}(2 \Sigma \omega) - \lambda 1$ \\
-$0 = \Sigma \omega - \lambda 1$
+$\cdot$
+$\begin{bmatrix}
+  \sigma_1^2 & \sigma_{12} & \sigma_{13} \\
+  \sigma_{12} & \sigma_2^2 & \sigma_{23} \\
+  \sigma_{13} & \sigma_{23} & \sigma_3^2 \\
+\end{bmatrix} $
+$\cdot $
+$\begin{bmatrix}
+  1 & 0 & 0 \\
+  0 & 1 & 0 \\
+  0 & 0 & 1 \\
+\end{bmatrix}$ 
+$+ \lambda \cdot$ 
+$(\begin{bmatrix}
+  1 & 0 & 0 \\
+  0 & 1 & 0 \\
+  0 & 0 & 1 \\
+\end{bmatrix}
+\cdot 
+\begin{bmatrix}
+  1 \\
+  1 \\
+  1 \\
+\end{bmatrix} + 0)$ \\ \\
+$0 = \frac{1}{2}$
+$\cdot $
+$\begin{bmatrix}
+  \sigma_1^2 & \sigma_{12} & \sigma_{13} \\
+  \sigma_{12} & \sigma_2^2 & \sigma_{23} \\
+  \sigma_{13} & \sigma_{23} & \sigma_3^2 \\
+\end{bmatrix}$
+$\cdot$
+$\begin{bmatrix}
+  \omega_1 \\
+  \omega_2 \\
+  \omega_3 \\
+\end{bmatrix}$
+$+$
+$\frac{1}{2}$
+$\cdot$
+$\begin{bmatrix}
+  \omega_1 & \omega_2 & \omega_3
+\end{bmatrix}$ 
+$\cdot$
+$\begin{bmatrix}
+  \sigma_1^2 & \sigma_{12} & \sigma_{13} \\
+  \sigma_{12} & \sigma_2^2 & \sigma_{23} \\
+  \sigma_{13} & \sigma_{23} & \sigma_3^2 \\
+\end{bmatrix} $
+$+ \lambda \cdot
+\begin{bmatrix}
+  1 \\
+  1 \\
+  1 \\
+\end{bmatrix}$ \\ \\
+$0 = \frac{1}{2}$
+$\cdot $
+$\begin{bmatrix}
+  \omega_1 \sigma_1^2 + \omega_2 \sigma_{12} + \omega_3 \sigma_{13} & \omega_1 \sigma_{12} + \omega_2 \sigma_2^2 + \omega_3 \sigma_{23} & \omega_1 \sigma_{13} + \omega_2 \sigma_{23} + \omega_3 \sigma_3^2
+\end{bmatrix}$
+$+$ \\ 
+$\frac{1}{2}$
+$\cdot$
+$\begin{bmatrix}
+  \omega_1 \sigma_1^2 + \omega_2 \sigma_{12} + \omega_3 \sigma_{13} & \omega_1 \sigma_{12} + \omega_2 \sigma_2^2 + \omega_3 \sigma_{23} & \omega_1 \sigma_{13} + \omega_2 \sigma_{23} + \omega_3 \sigma_3^2
+\end{bmatrix}$
+$+ \lambda \cdot
+\begin{bmatrix}
+  1 \\
+  1 \\
+  1 \\
+\end{bmatrix}$ \\ \\
+$0 =$
+$\begin{bmatrix}
+  \omega_1 \sigma_1^2 + \omega_2 \sigma_{12} + \omega_3 \sigma_{13} & \omega_1 \sigma_{12} + \omega_2 \sigma_2^2 + \omega_3 \sigma_{23} & \omega_1 \sigma_{13} + \omega_2 \sigma_{23} + \omega_3 \sigma_3^2
+\end{bmatrix}$
+$+ \lambda \cdot
+\begin{bmatrix}
+  1 \\
+  1 \\
+  1 \\
+\end{bmatrix}$ \\
+$0 =$
+$\begin{bmatrix}
+  \sigma_1^2 & \sigma_{12} & \sigma_{13} \\
+  \sigma_{12} & \sigma_2^2 & \sigma_{23} \\
+  \sigma_{13} & \sigma_{23} & \sigma_3^2 \\
+\end{bmatrix}$
+$\cdot$
+$\begin{bmatrix}
+  \omega_1 \\
+  \omega_2 \\
+  \omega_3 \\
+\end{bmatrix}$
+$+ \lambda \cdot
+\begin{bmatrix}
+  1 \\
+  1 \\
+  1 \\
+\end{bmatrix}$ \\ \\
+$0 = \Sigma \omega - \lambda 1$ \\
+as we sought to show.
 
 }
 
