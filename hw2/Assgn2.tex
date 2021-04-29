@@ -23,8 +23,6 @@ $\underset{\omega_1, \omega_2, \omega_3}{\text{min}} \frac{1}{2}\omega^T \Sigma 
 s.t. $\omega_1 + \omega_2 + \omega_3 = 1$, or $\omega^T 1 = 1$ \\ \\
 We know that to the Langrangian will be in the form $\mathcal{L} (\omega, \lambda) = f(x) + \lambda g(x)$, for $g(x) = 0$. We have $f(x) = \frac{1}{2}\omega^T \Sigma \omega$ and $g(x) = \omega^T 1 = 1$, so we can effectively modify this equation to be
 $\mathcal{L} (\omega, \lambda) = \frac{1}{2}\omega^T \Sigma \omega + \lambda (\omega^T 1 - 1)$ \\ \\
-% for which we take the gradient to get \\
-% $\nabla_\omega \mathcal{L} (\omega, \lambda) = \Sigma \omega + \lambda 1 = 0$
 In matrix form, we can represent this as follows: \\ \\
 $\frac{1}{2}$
 $\cdot$
@@ -179,8 +177,6 @@ as we hoped to show.
 
 \section*{3.}
 {\Large 
-
-You are given the market term structure of interest rates as of today, date $t$, and you are about to place a trade for a receiver interest rate swap that will have its first reset date and time $T_0 > t$, with both fixed and floating rates paid at successive dates $T_1, T_2, \dots, T_n$, where the floating rate to be paid at each date $T_i$ is fixed on the previous date $T_{i-1}$. The fixed rate to be paid is $S$, $\tau_i = \tau(T_{i-1}, T_i)$ is the date count-adjusted year fraction on each interval, and the forward interest rate over each interval as seen today is represented by $F(t; T_{i-1}, T_i)$, as we discussed in class.
 
 \subsection*{(a)}
 

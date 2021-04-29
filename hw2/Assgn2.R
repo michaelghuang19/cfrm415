@@ -74,12 +74,11 @@ solve_q5 <- function() {
   weight_vector <- as.matrix(unlist(gmvp$solution))
   returns <- t(mean_vector) %*% weight_vector
   variance <- t(weight_vector) %*% D %*% weight_vector
-  volatility <- sqrt(variance)
   
   print("optimizing weights for gmvp:")
   print(weight_vector)
   print(paste("annualized returns: ", returns * 12))
-  print(paste("annualized volatility: ", volatility * 12))
+  print(paste("annualized volatility: ", sqrt(12 * variance)))
   
   # c) Find the weights that minimize the portfolio variance for the case where the target monthly portfolio return is 1%. Also, calculate the annualized volatility
   print("5c")
@@ -93,12 +92,11 @@ solve_q5 <- function() {
   weight_vector <- as.matrix(unlist(one_pct$solution))
   returns <- t(mean_vector) %*% weight_vector
   variance <- t(weight_vector) %*% D %*% weight_vector
-  volatility <- sqrt(variance)
   
   print("weights for 1% target return:")
   print(weight_vector)
   print(paste("monthly returns sanity check: ", returns))
-  print(paste("annualized volatility: ", volatility * 12))
+  print(paste("annualized volatility: ", sqrt(12 * variance)))
 }
 
 ### "Main" ###
