@@ -1,19 +1,18 @@
 # Midterm code 
 
 import numpy as np
+import sys
 
 from scipy import linalg
 
 import constants as c
 import helpers as h
 
-def main():
-  if c.run_a1:
-    a1()
-
-  # if c.run_a2:
-  #   a2()
-
+def main(function_num):
+  if (c.function_list[function_num - 1] != None):
+    c.function_list[function_num - 1]()
+  else:
+    print("No such function")
 
 def a1():
   print("a1")
@@ -46,9 +45,8 @@ def a1():
   print(returns)
   print(volatility)
 
-
   
 
 if __name__ == "__main__":
-  main()
+  main(int(sys.argv[1]))
 
