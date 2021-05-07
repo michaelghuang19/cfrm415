@@ -47,7 +47,33 @@ def a1():
   print(returns)
   print(volatility)
 
-  
+def a5():
+  print("a5")
+
+  annual = c.a5_annual
+  annual = sorted(annual)
+  mean_annual = np.mean(annual)
+
+  sigma = c.a5_monthly
+  omega = c.a5_monthly_weights
+
+  coeff = np.sqrt(12)
+  Z = -1.64
+  V = 1.5E6
+
+  variance = (omega).dot(sigma).dot(omega.T)
+  std = np.sqrt(variance)
+
+  var = coeff * Z * std * V
+
+  # part a responses
+  print(annual)
+  print(mean_annual)
+
+  # part b responses
+  print(variance)
+  print(std)
+  print(var)
 
 if __name__ == "__main__":
   main(int(sys.argv[1]))

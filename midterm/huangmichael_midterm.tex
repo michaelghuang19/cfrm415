@@ -241,9 +241,51 @@ $PV = 101,000 \cdot 0.5083333 \cdot 0.98989858648 \cdot 0.02007$ \\
 
 \subsection*{(a)}
 
+Suppose the value of your portfolio is \$1.5 million. Determine the absolute historical Value-at-Risk at 90\% probability, where absolute means to include the mean portfolio return in the result. \\ \\
+
+% Our confidence coefficient is $1 - \alpha = $ 90\%, so we aim to find the z-score for where there is $\alpha = 1 - 0.9 = 0.1$ area under the normal curve to the left. Looking at a table, we can find this to be $\sim -1.28$. \\
+% We can calculate the mean and standard deviations of our historical annual data using $\mu = \frac{1}{n} \sum_{i=1}^{n} x_i$ and $\sigma = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (x_i - \mu)^2}$, respectively; we find that $\mu = 0.0565$ and $\sigma = 0.1513$. \\
+% Putting this all together, we can take the value at risk at 90\% to be \\
+% $|(Z_\alpha\sigma_p + \mu)V_0|$ \\
+% $|((-1.28 \cdot 0.1513) + 0.0565) \cdot 1.5\text{+E6}|$ \\
+% $|(-0.137164) \cdot 1.5\text{+E6}|$ \\
+% $|-205746| = $ \framebox[1.1\width]{\textbf{205746}}
+% which means that historically, we have a 90\% probability of losing at most \$205746 in a year (or a 10\% probability of losing more than that in a year).
+
+Our confidence coefficient is $1 - \alpha = 90\%$, so we aim to find the values for the bottom $\alpha = 1 - 0.9 = 0.1$ of all values. Looking at a sorted version of the table, we can see that the bottom $0.10 \cdot 20$ values = 2, and the 2nd-lowest value is $-0.14$. We can also calculate the mean of our historical annual data using $\mu = \frac{1}{n} \sum_{i=1}^{n} x_i$, which we find are $\mu = 0.0565$. \\
+We can therefore say that historically, we have a 90\% probability of losing at most \\
+$VaR = |(Z_\alpha + \mu)V_0|$ \\
+$= |(-0.14 + 0.0565) \cdot 1.5\text{E6}|$ \\
+$= |-0.0835 * 1.5\text{E6}| = |-125250|$ \\
+$= $ \framebox[1.1\width]{\textbf{125,250}} dollars in a year (or a 10\% probability of losing more than that in a year!).
+
 \subsection*{(b)}
 
-\subsection*{(c)}
+Again, suppose the value of your portfolio is \$1.5 million, and it consists of three funds, with covariance matrix of monthly returns and respective portfolio weights 35\%, 30\%, and 35\%. Compute the relative annual parametric VaR at 95\% probability, assuming normally distributed returns. \\ \\
+
+% $VaR = P \cdot \sigma_P \cdot Z_\alpha$
+$\sigma_P^2 = \omega^T \Sigma \omega$ \\
+$\sigma_P^2 = 
+\begin{bmatrix}
+  0.35 & 0.30 & 0.35
+\end{bmatrix}
+\begin{bmatrix}
+  0.25 & 0.12 & 0.03 \\
+  0.12 & 0.31 & 0.13 \\
+  0.03 & 0.13 & 0.24 \\
+\end{bmatrix}
+\begin{bmatrix}
+  0.35 \\
+  0.30 \\
+  0.35
+\end{bmatrix}$ \\
+$\sigma_P^2 = [0.147775]$ \\
+$\sigma_P = [0.38441514]$ \\ \\
+We know that by definition, since we are using monthly data, annual variance = $12 \sigma_p^2$, so to find annual VaR, we take $-2\sqrt{3}Z_\alpha \sigma_P V_0$. We just found $\sigma_P$. Looking at a z-value table we find that the corresponding z-value for $\alpha = 1 - 0.95 = 0.05$ is approximately $-1.64$. We are given $V_0 = 1.5\text{E6}$. Putting this all together: \\
+$\sigma_{PA}^2 = 12 \sigma_p^2$ \\
+$VaR_{PA} = |2\sqrt{3} Z_\alpha \sigma_P V_0|$ \\
+$VaR_{PA} = |2\sqrt{3} \cdot -1.64 \cdot 0.38441514 \cdot 1.5\text{E6}|$ \\
+\framebox[1.1\width]{\textbf{$VaR_{PA} = 3,275,866.64563746$}} 
 
 }
 
