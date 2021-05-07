@@ -1,4 +1,6 @@
 # Midterm code 
+# Run using
+# python code.p [question number]
 
 import numpy as np
 import sys
