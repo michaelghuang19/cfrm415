@@ -15,8 +15,6 @@
 
 \thispagestyle{firstpageheader}
 
-\framebox[1.1\width]{\textbf{answer}}
-
 \section*{1.}
 
 {\Large 
@@ -168,20 +166,84 @@ $\sigma = $ \framebox[1.1\width]{\textbf{$\sim$ 0.06857}}
 You enter into a one-year payer swap that pays cashflows semiannually. The value date (today, 2021.05.06) is the first reset date, and assume the notional value is 1 (to keep it simple), until you get to part (e).
 
 \subsection*{(a)}
-Assuming that a reset date that falls on a weekend or holiday is rolled to the next business day, write out the reset and payment dates for the swap; notate them with 𝑇0,𝑇1,𝑇2 in your answer.
+
+\framebox[1.1\width]{\textbf{$T_0 = 2021.05.06$}} \\ 
+Count 182 days... \\  
+\framebox[1.1\width]{\textbf{$T_1 = 2021.11.04$}} \\
+Count 365 days from start... \\
+\framebox[1.1\width]{\textbf{$T_2 = 2022.05.06$}}
 
 \subsection*{(b)}
 
-Assuming an Actual/360 day-count convention, calculate and write out the day-count adjusted year fractions 𝜏1, 𝜏2 , and 𝜏(𝑇0,𝑇2). You may use a tool like R/lubridate, Excel, etc to calculate the number of days between the dates and just indicate these results in your calculations. You will need the results in subsequent sections.
+$\tau_1 = \tau(T_0, T_1) = \frac{182 days}{360 days / year} = $ \framebox[1.1\width]{\textbf{0.5055556}} \\
+$\tau_2 = \tau(T_1, T_2) = \frac{183 days}{360 days / year} = $ \framebox[1.1\width]{\textbf{0.5083333}} \\
+$\tau(T_0, T_2) = \frac{365 days}{360 days / year} = $ \framebox[1.1\width]{\textbf{1.013889}} \\ \\
+I used lubridate:
+\begin{verbatim}
+t0 <- ymd(20210506)
+t1 <- ymd(20211104)
+t2 <- ymd(20220506)
+
+print(t1 - t0)
+print((t1 - t0) / 360)
+print(t2 - t1)
+print((t2 - t1) / 360)
+print(t2 - t0)
+print((t2 - t0) / 360)
+\end{verbatim}
 
 \subsection*{(c)}
+
+\begin{tabular}{ | c | c | c | c |}
+	\hline
+		$i$ & $P(T_0, T_i)$ & $P(T_{i-1}, T_i)$ & $L(T_{i-1}, T_i)$ \\
+  \hline
+		1 & 0.99495720181 & 0.99495720181 & 1\% \\
+  \hline
+		2 & 0.98490672768 & 0.98989858648 & 2.007\% \\
+	\hline
+\end{tabular} \\ \\
+$P(T_0, T_1) = e^{-R(T_0, T_1)\tau(T_0, T_1)} = e^{-0.01 \cdot 0.5055556} = e^{-0.005055556} = 0.99495720181$ \\
+$P(T_0, T_2) = e^{-R(T_0, T_2)\tau(T_0, T_2)} = e^{-0.015 \cdot 1.013889} = e^{-0.015208335} = 0.98490672768$ \\
+$P(T_1, T_2) = \frac{P(T_0, T_2)}{P(T_0, T_1)} = \frac{0.98490672768}{0.99495720181} = 0.98989858648$ \\
+$L(T_1, T_2) = \frac{1 - P(T_1, T_2)}{\tau(T_1, T_2) P(T_1, T_2)} = \frac{1 - 0.98989858648}{0.5083333 \cdot 0.98989858648}$ = $\frac{0.01010141352}{0.50319841513} = 0.02007441441 = \sim 2.007\%$
+
+\subsection*{(d)}
+
+$S = \frac{\sum_{i=1}^{n} \tau_i P(T_0, T_i) F(T_0; T_{i-1}, T_i)}{\sum_{i=1}^{n} \tau_i P(T_0, T_i)}$ \\
+$S = \frac{\tau_1 \cdot P(T_0, T_1) \cdot L(T_0, T_1) + \tau_2 \cdot P(T_0, T_2) \cdot L(T_1, T_2)}{\tau_1 \cdot P(T_0, T_1) + \tau_2 \cdot P(T_0, T_2)}$ \\
+$S = \frac{0.5055556 \cdot 0.99495720181 \cdot 0.01 + 0.5083333 \cdot 0.98490672768 \cdot 0.02007}{0.5055556 \cdot 0.99495720181 + 0.5083333 \cdot 0.98490672768}$ \\
+$S = \frac{0.01507832585}{1.00366707221}$ \\
+\framebox[1.1\width]{\textbf{$S = 0.01502323456$}}
+
+\subsection*{(e)}
+
+To calculate the present value of floating (we start with 1.01 since we just exchanged interest payments): \\
+$PV = 1.01 \cdot \sum_{i=1}^{n} \tau_i P(T_0, T_i) F(T_0; T_{i-1}, T_i)$ \\
+$PV = 1.01 \cdot \sum_{i=2}^{2} \tau_i P(T_0, T_i) F(T_0; T_{i-1}, T_i)$ \\
+$PV = 1.01 \cdot \tau_2 P(T_1, T_2) F(T_1; T_1, T_2)$ \\
+$PV = 1.01 \cdot 0.5083333 \cdot  0.98989858648 \cdot 0.02007$ \\
+\framebox[1.1\width]{\textbf{$PV = 0.01020018411$}}
+
+\subsection*{(f)}
+
+To calculate the present value of floating with 100,000 (we start with $100,000 \cdot 1.01 = 101,000$ since we just exchanged interest payments): \\
+$PV = 101,000 \cdot \sum_{i=1}^{n} \tau_i P(T_0, T_i) F(T_0; T_{i-1}, T_i)$ \\
+$PV = 101,000 \cdot \sum_{i=2}^{2} \tau_i P(T_0, T_i) F(T_0; T_{i-1}, T_i)$ \\
+$PV = 101,000 \cdot \tau_2 P(T_1, T_2) F(T_1; T_1, T_2)$ \\
+$PV = 101,000 \cdot 0.5083333 \cdot 0.98989858648 \cdot 0.02007$ \\
+\framebox[1.1\width]{\textbf{$PV = 1020.01841136$}}
 
 }
 
 \section*{5.}
 {\Large 
 
+\subsection*{(a)}
 
+\subsection*{(b)}
+
+\subsection*{(c)}
 
 }
 

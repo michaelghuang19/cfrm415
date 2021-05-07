@@ -45,3 +45,5 @@ vignettes/*.pdf
 *.log
 *.pdf
 *.synctex.gz
+
+*/__pycache__/
