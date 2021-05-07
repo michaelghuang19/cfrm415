@@ -94,15 +94,13 @@ Let $R_i$ and $R_j$ be random variables representing annual excess returns on se
 
 \subsection*{(a)}
 
-Write the regression equation for $R_i$, including the statistical conditions on the error terms, and identify the terms representing the systematic and idiosyncratic risks. \\
-
 By CAPM, we know that \\
 $r_i = \alpha_i + r_f + \beta_i(r_M - r_f) + \epsilon_i$ \\ 
 $R_i = \alpha_i + \beta_i (r_M - r_f) + \epsilon_i$ \\
-$R_i = \alpha_i + \beta_i (R_M) + \epsilon_i$ \\
+\framebox[1.1\width]{\textbf{$R_i = \alpha_i + \beta_i (R_M) + \epsilon_i$}} \\
 with $\epsilon_i$ statistically defined with expectation 0, and variance $\sigma_i^2$ \\ \\
 We have that $\epsilon_i$ is the idiosyncratic or non-systematic risk since it is directly associated with security $i$, while $\beta_i (R_M)$ is the systematic risk as it is only correlated with the market.
-% $\beta_i = \frac{Cov(r_i, r_M)}{\sigma_M^2}$
+% TODO: Check idiosyncratic
 
 \subsection*{(b)}
 
@@ -129,8 +127,6 @@ as we hoped to show.
 \section*{3.}
 {\Large 
 
-Suppose that the risk-free rate of interest is 0.07, and the expected rate of return on the market portfolio is 0.14. The volatility (standard deviation) of the market portfolio is 0.12.
-
 We are given that $r_f = 0.07, r_M = 0.14, \sigma_M = 0.12$.
 
 \subsection*{(a)}
@@ -142,7 +138,7 @@ We are given that $r_f = 0.07, r_M = 0.14, \sigma_M = 0.12$.
 
 \subsection*{(b)}
 
-Suppose that of our entire portfolio, we put $y$ towards the market portfolio:
+Suppose that of our entire portfolio, we put $y$ towards the market portfolio: \\
 $0.11 = 0.07(1-y) + 0.14(y)$ \\ 
 $0.11 = 0.07 - 0.07y + 0.14y$ \\ 
 $0.04 = 0.07y$ \\ 
@@ -163,13 +159,11 @@ $\sigma = $ \framebox[1.1\width]{\textbf{$\sim$ 0.06857}}
 \section*{4.}
 {\Large 
 
-You enter into a one-year payer swap that pays cashflows semiannually. The value date (today, 2021.05.06) is the first reset date, and assume the notional value is 1 (to keep it simple), until you get to part (e).
-
 \subsection*{(a)}
 
 \framebox[1.1\width]{\textbf{$T_0 = 2021.05.06$}} \\ 
 Count 182 days... \\  
-\framebox[1.1\width]{\textbf{$T_1 = 2021.11.04$}} \\
+\framebox[1.1\width]{\textbf{$T_1 = 2021.11.06$}} \\
 Count 365 days from start... \\
 \framebox[1.1\width]{\textbf{$T_2 = 2022.05.06$}}
 

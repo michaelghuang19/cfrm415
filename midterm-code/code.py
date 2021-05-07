@@ -32,8 +32,6 @@ def a1():
 
   returns = (omega.T).dot(mu)
 
-  # variance < - t(weight_vector) % * % D % * % weight_vector
-
   variance_denom = (ones.T).dot(sigma_inv).dot(ones)
   variance = 1 / (variance_denom)
   volatility = np.sqrt(variance)
@@ -46,6 +44,7 @@ def a1():
   print(omega)
   print(returns)
   print(volatility)
+  # print(np.sqrt((omega.T).dot(sigma).dot(omega)))
 
 def a5():
   print("a5")
