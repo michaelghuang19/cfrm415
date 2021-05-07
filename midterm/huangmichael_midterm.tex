@@ -162,20 +162,20 @@ $\sigma = $ \framebox[1.1\width]{\textbf{$\sim$ 0.06857}}
 \subsection*{(a)}
 
 \framebox[1.1\width]{\textbf{$T_0 = 2021.05.06$}} \\ 
-Count 182 days... \\  
-\framebox[1.1\width]{\textbf{$T_1 = 2021.11.06$}} \\
-Count 365 days from start... \\
+Add 6 months, but $2021.11.06$ is a Saturday, so we need to move this payment date to $2021.11.08$ which is the next business day (Monday) \\  
+\framebox[1.1\width]{\textbf{$T_1 = 2021.11.08$}} \\
+Count 12 months from start... \\
 \framebox[1.1\width]{\textbf{$T_2 = 2022.05.06$}}
 
 \subsection*{(b)}
 
-$\tau_1 = \tau(T_0, T_1) = \frac{182 days}{360 days / year} = $ \framebox[1.1\width]{\textbf{0.5055556}} \\
-$\tau_2 = \tau(T_1, T_2) = \frac{183 days}{360 days / year} = $ \framebox[1.1\width]{\textbf{0.5083333}} \\
-$\tau(T_0, T_2) = \frac{365 days}{360 days / year} = $ \framebox[1.1\width]{\textbf{1.013889}} \\ \\
+$\tau_1 = \tau(T_0, T_1) = \frac{186 \text{ days}}{360 \text{ days / year}} = $ \framebox[1.1\width]{\textbf{0.5166667}} \\
+$\tau_2 = \tau(T_1, T_2) = \frac{179 \text{ days}}{360 \text{ days / year}} = $ \framebox[1.1\width]{\textbf{0.4972222}} \\
+$\tau(T_0, T_2) = \frac{365 \text{ days}}{360 \text{ days / year}} = $ \framebox[1.1\width]{\textbf{1.013889}} \\ \\
 I used lubridate:
 \begin{verbatim}
 t0 <- ymd(20210506)
-t1 <- ymd(20211104)
+t1 <- ymd(20211108)
 t2 <- ymd(20220506)
 
 print(t1 - t0)
@@ -192,41 +192,58 @@ print((t2 - t0) / 360)
 	\hline
 		$i$ & $P(T_0, T_i)$ & $P(T_{i-1}, T_i)$ & $L(T_{i-1}, T_i)$ \\
   \hline
-		1 & 0.99495720181 & 0.99495720181 & 1\% \\
+		1 & 0.99484665726 & 0.99484665726 & 1\% \\
   \hline
-		2 & 0.98490672768 & 0.98989858648 & 2.007\% \\
+		2 & 0.98490672768 & 0.99000858121 & 2.03\% \\
 	\hline
-\end{tabular} \\ \\
-$P(T_0, T_1) = e^{-R(T_0, T_1)\tau(T_0, T_1)} = e^{-0.01 \cdot 0.5055556} = e^{-0.005055556} = 0.99495720181$ \\
-$P(T_0, T_2) = e^{-R(T_0, T_2)\tau(T_0, T_2)} = e^{-0.015 \cdot 1.013889} = e^{-0.015208335} = 0.98490672768$ \\
-$P(T_1, T_2) = \frac{P(T_0, T_2)}{P(T_0, T_1)} = \frac{0.98490672768}{0.99495720181} = 0.98989858648$ \\
-$L(T_1, T_2) = \frac{1 - P(T_1, T_2)}{\tau(T_1, T_2) P(T_1, T_2)} = \frac{1 - 0.98989858648}{0.5083333 \cdot 0.98989858648}$ = $\frac{0.01010141352}{0.50319841513} = 0.02007441441 = \sim 2.007\%$
+\end{tabular} \\ \\ \\
+$P(T_0, T_1) = e^{-R(T_0, T_1)\tau(T_0, T_1)} = e^{-0.01 \cdot 0.5166667} = e^{-0.005166667} = 0.99484665726$ \\ \\
+$P(T_0, T_2) = e^{-R(T_0, T_2)\tau(T_0, T_2)} = e^{-0.015 \cdot 1.013889} = e^{-0.015208335} = 0.98490672768$ \\ \\
+$P(T_1, T_2) = \frac{P(T_0, T_2)}{P(T_0, T_1)} = \frac{0.98490672768}{0.99484665726} = 0.99000858121$ \\ \\
+$L(T_1, T_2) = \frac{1 - P(T_1, T_2)}{\tau(T_1, T_2) P(T_1, T_2)} = \frac{1 - 0.99000858121}{0.4972222 \cdot 0.99000858121}$ = $\frac{0.00999141879}{0.49225424476} = 0.02029727299 = \sim 2.03\%$
 
 \subsection*{(d)}
 
-$S = \frac{\sum_{i=1}^{n} \tau_i P(T_0, T_i) F(T_0; T_{i-1}, T_i)}{\sum_{i=1}^{n} \tau_i P(T_0, T_i)}$ \\
-$S = \frac{\tau_1 \cdot P(T_0, T_1) \cdot L(T_0, T_1) + \tau_2 \cdot P(T_0, T_2) \cdot L(T_1, T_2)}{\tau_1 \cdot P(T_0, T_1) + \tau_2 \cdot P(T_0, T_2)}$ \\
-$S = \frac{0.5055556 \cdot 0.99495720181 \cdot 0.01 + 0.5083333 \cdot 0.98490672768 \cdot 0.02007}{0.5055556 \cdot 0.99495720181 + 0.5083333 \cdot 0.98490672768}$ \\
-$S = \frac{0.01507832585}{1.00366707221}$ \\
-\framebox[1.1\width]{\textbf{$S = 0.01502323456$}}
+$S = \frac{\sum_{i=1}^{n} \tau_i P(T_0, T_i) F(T_0; T_{i-1}, T_i)}{\sum_{i=1}^{n} \tau_i P(T_0, T_i)}$ \\ \\
+$S = \frac{\tau_1 \cdot P(T_0, T_1) \cdot L(T_0, T_1) + \tau_2 \cdot P(T_0, T_2) \cdot L(T_1, T_2)}{\tau_1 \cdot P(T_0, T_1) + \tau_2 \cdot P(T_0, T_2)}$ \\ \\ 
+$S = \frac{0.5166667 \cdot 0.99484665726 \cdot 0.01 + 0.4972222 \cdot 0.98490672768 \cdot 0.0203}{0.5166667 \cdot 0.99484665726 + 0.4972222 \cdot 0.98490672768}$ \\ \\
+$S = \frac{0.01508130643}{1.00372162934}$ \\ \\
+\framebox[1.1\width]{\textbf{$S =$ 0.0150253875}}
 
 \subsection*{(e)}
 
-To calculate the present value of floating (we start with 1.01 since we just exchanged interest payments): \\
-$PV = 1.01 \cdot \sum_{i=1}^{n} \tau_i P(T_0, T_i) F(T_0; T_{i-1}, T_i)$ \\
-$PV = 1.01 \cdot \sum_{i=2}^{2} \tau_i P(T_0, T_i) F(T_0; T_{i-1}, T_i)$ \\
-$PV = 1.01 \cdot \tau_2 P(T_1, T_2) F(T_1; T_1, T_2)$ \\
-$PV = 1.01 \cdot 0.5083333 \cdot  0.98989858648 \cdot 0.02007$ \\
-\framebox[1.1\width]{\textbf{$PV = 0.01020018411$}}
+After the swap has gone into effect, we find the value of the payer swap by taking the difference between the remaining floating and fixed leg present values (we start with 1.01 since we just exchanged interest payments): \\
+$N(PV(floating) - PV(fixed))$ \\
+$= 1.01 \cdot (PV(floating) - PV(fixed))$ \\
+$= 1.01 \cdot (\sum_{i=1}^{n} \tau_i P(T_0, T_i) F(T_0; T_{i-1}, T_i) - S \sum_{i=1}^{n} \tau_i P(T_0, T_i))$ \\ 
+$= 1.01 \cdot (\tau_2 P(T_1, T_2) L(T_1, T_2) - S \tau_2 P(T_1, T_2))$ \\
+$= 1.01 \cdot (0.4972222 \cdot 0.99000858121 \cdot 0.0203 - 0.0150253875 \cdot 0.4972222 \cdot 0.99000858121)$ \\
+$= 1.01 \cdot (0.00999276116 - 0.00739631077)$ \\
+$= 1.01 \cdot (0.00259645039)$ \\
+% To calculate the present value of floating : \\
+% $PV = 1.01 \cdot \sum_{i=1}^{n} \tau_i P(T_0, T_i) F(T_0; T_{i-1}, T_i)$ \\
+% $PV = 1.01 \cdot \sum_{i=2}^{2} \tau_i P(T_0, T_i) F(T_0; T_{i-1}, T_i)$ \\
+% $PV = 1.01 \cdot \tau_2 P(T_1, T_2) F(T_1; T_1, T_2)$ \\
+% $PV = 1.01 \cdot 0.5083333 \cdot  0.98989858648 \cdot 0.02007$ \\
+$= $ \framebox[1.1\width]{\textbf{0.00262241489}}
 
 \subsection*{(f)}
 
-To calculate the present value of floating with 100,000 (we start with $100,000 \cdot 1.01 = 101,000$ since we just exchanged interest payments): \\
-$PV = 101,000 \cdot \sum_{i=1}^{n} \tau_i P(T_0, T_i) F(T_0; T_{i-1}, T_i)$ \\
-$PV = 101,000 \cdot \sum_{i=2}^{2} \tau_i P(T_0, T_i) F(T_0; T_{i-1}, T_i)$ \\
-$PV = 101,000 \cdot \tau_2 P(T_1, T_2) F(T_1; T_1, T_2)$ \\
-$PV = 101,000 \cdot 0.5083333 \cdot 0.98989858648 \cdot 0.02007$ \\
-\framebox[1.1\width]{\textbf{$PV = 1020.01841136$}}
+After the swap has gone into effect, we find the value of the payer swap by taking the difference between the remaining floating and fixed leg present values (we start with $100,000 \cdot 1.01 = 101,000$ since we just exchanged interest payments): \\
+$N(PV(floating) - PV(fixed))$ \\
+$= 101,000 \cdot (PV(floating) - PV(fixed))$ \\
+$= 101,000 \cdot (\sum_{i=1}^{n} \tau_i P(T_0, T_i) F(T_0; T_{i-1}, T_i) - S \sum_{i=1}^{n} \tau_i P(T_0, T_i))$ \\ 
+$= 101,000 \cdot (\tau_2 P(T_1, T_2) L(T_1, T_2) - S \tau_2 P(T_1, T_2))$ \\
+$= 101,000 \cdot (0.4972222 \cdot 0.99000858121 \cdot 0.0203 - 0.0150253875 \cdot 0.4972222 \cdot 0.99000858121)$ \\
+$= 101,000 \cdot (0.00999276116 - 0.00739631077)$ \\
+$= 101,000 \cdot (0.00259645039)$ \\
+$= $ \framebox[1.1\width]{\textbf{262.24148939}}
+% To calculate the present value of floating with 100,000 : \\
+% $PV = 101,000 \cdot \sum_{i=1}^{n} \tau_i P(T_0, T_i) F(T_0; T_{i-1}, T_i)$ \\
+% $PV = 101,000 \cdot \sum_{i=2}^{2} \tau_i P(T_0, T_i) F(T_0; T_{i-1}, T_i)$ \\
+% $PV = 101,000 \cdot \tau_2 P(T_1, T_2) F(T_1; T_1, T_2)$ \\
+% $PV = 101,000 \cdot 0.5083333 \cdot 0.98989858648 \cdot 0.02007$ \\
+% \framebox[1.1\width]{\textbf{$PV =$ 1020.01841136}}
 
 }
 
@@ -248,7 +265,7 @@ Suppose the value of your portfolio is \$1.5 million. Determine the absolute his
 
 Our confidence coefficient is $1 - \alpha = 90\%$, so we aim to find the values for the bottom $\alpha = 1 - 0.9 = 0.1$ of all values. Looking at a sorted version of the table, we can see that the bottom $0.10 \cdot 20$ values = 2, and the 2nd-lowest value is $-0.14$. We can also calculate the mean of our historical annual data using $\mu = \frac{1}{n} \sum_{i=1}^{n} x_i$, which we find are $\mu = 0.0565$. \\
 We can therefore say that historically, we have a 90\% probability of losing at most \\
-$VaR = |(Z_\alpha + \mu)V_0|$ \\
+$VaR = |(r_\text{cutoff} + \mu)V_0|$ \\
 $= |(-0.14 + 0.0565) \cdot 1.5\text{E6}|$ \\
 $= |-0.0835 * 1.5\text{E6}| = |-125250|$ \\
 $= $ \framebox[1.1\width]{\textbf{125,250}} dollars in a year (or a 10\% probability of losing more than that in a year!).
@@ -257,7 +274,6 @@ $= $ \framebox[1.1\width]{\textbf{125,250}} dollars in a year (or a 10\% probabi
 
 Again, suppose the value of your portfolio is \$1.5 million, and it consists of three funds, with covariance matrix of monthly returns and respective portfolio weights 35\%, 30\%, and 35\%. Compute the relative annual parametric VaR at 95\% probability, assuming normally distributed returns. \\ \\
 
-% $VaR = P \cdot \sigma_P \cdot Z_\alpha$
 $\sigma_P^2 = \omega^T \Sigma \omega$ \\
 $\sigma_P^2 = 
 \begin{bmatrix}

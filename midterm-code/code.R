@@ -16,7 +16,7 @@ thirty_360_eur <- function(d1, d2) {
 }
 
 t0 <- ymd(20210506)
-t1 <- ymd(20211104)
+t1 <- ymd(20211108)
 t2 <- ymd(20220506)
 
 print(t1 - t0)
