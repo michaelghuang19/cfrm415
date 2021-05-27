@@ -19,65 +19,58 @@
 
 {\Large 
 
-Show that for a European call option, we get the stronger result \\
-$C \geq S - PV(X) $ \\
-Include a diagram to illustrate this.  What does this tell us about the time value of a European call option? \\ \\
-
-% According to put-call parity, we know \\
-% $C - P - S + PV(X) = 0$ \\
-% $C - P = S - PV(X)$ \\
-% $C = S - PV(X) + P$ \\
-% Since $P > 0$, we know that \\
-% $C \geq S - PV(X)$
-
-% payoff diagram  
-
+According to put-call parity, we know that \\
+$C - P - S + PV(X) = 0$ \\
+$C - P = S - PV(X)$ \\
+$C = S - PV(X) + P$ \\
+Since $P > 0$, we can see that \\
+$C \geq S - PV(X)$ \\
+as we aimed to show. \\ \\
 % The time value of a call is more the than the time value of a corresponding put.
 % Time value part is greater than just share price or loan?
-% Time value is always positive, while time value for put can go negative.
+This confirms that the time value is always positive for the European call option, as displayed by the difference between the lines.
+% nonnegative?
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=120mm]{./1.png}
+\end{figure}
+
+\newpage
 
 }
 
 \section*{2.}
 {\Large
 
-Suppose a trader writes a European put option with exercise price $X$.  Let $t$ be such that $0 \geq t < T$, where 0 represents the first trading day for the option contract, and $T$ is its expiration date.
-
 \subsection*{(a)}
 
-What does the trader believe will happen to the underlying stock price $S$ when writing the put? \\ \\
-
-% The trader believes that the stock price $S$ will go below $X$ at time $T$, once they can exercise the option. Specifically, if the trader pays some premium $P$ on the option, then they would expect the stock price $S$ to go at least $P$ below $X$, or that $S$ will be at most $X - P$ at time $T$. 
+The trader believes that the stock price $S$ will go below $X$ at time $T$, the time at which they can then exercise the option. 
+% Specifically, if the trader pays some premium $P$ on the option, then they would expect the stock price $S$ to go at least $P$ below $X$, or that $S$ will be at most $X - P$ at time $T$. 
 
 \subsection*{(b)}
 
-Draw the payoff diagram at expiration, let $V$ be the value of the option position in the graph. \\ \\
-
-% done? not sure whether or not to include P or nah
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=120mm]{./2.png}
+\end{figure}
 
 \subsection*{(c)}
 
-Draw the curve showing the value of the position for some arbitrary value of $t$. \\ \\
-
-% should curve start below the dotted line?
-% should either line go below 0?
+See part (b), labeled as $P_t$.
 
 \subsection*{(d)}
 
-Show a point on the curve (drawn in c)) where the put option is deep in the money. What can you say about the intrinsic value and the time value? \\ \\
-
-% intrinsic value = equity share price - exercise price
-% time value = possibility of becoming more valuable before expiration date
-
-% The intrinsic value will be relatively high (exercise price is low, relative to share price)
-% The time value will be relatively low (lower chance of becoming more valuable, depending on t).
+See part (b), labeled as $DITM$. \\
+The intrinsic value will be relatively high and positive. \\
+The time value will be relatively low, and in our case according to the point we picked on the curve, even negative.
 
 \subsection*{(e)}
 
-Show a point on the curve (drawn in c)) where the put option is deep out of the money.  What can you say about the intrinsic value and the time value now? \\ \\
-
-% The intrinsic value will be zero (we cannot exercise the put option for profit, it is worthless)
-% The time value will be relatively high (greater chance of becoming more valuable, depends on t)
+See part (b), labeled as $DOTM$. \\ \\
+The intrinsic value at this point is zero (we cannot exercise the put option for profit, so it is worthless). 
+The time value will be higher in comparison with the time value at the point where we are deep in the money. 
+% (greater chance of becoming more valuable, depends on t)
 % could also be smol, depending on diff between option value at/before expiry
 
 }
