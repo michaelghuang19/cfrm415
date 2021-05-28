@@ -78,14 +78,12 @@ The time value will be higher in comparison with the time value at the point whe
 \section*{3.}
 {\Large 
 
-A European capped call option is like a European call option except that the payoff is $H - X$ for some constant $H > X$, instead of $S - X$, when the terminal stock price exceeds $H$.  Construct a portfolio of European options with an identical payoff. Explain your reasoning. \\ \\
-
-% Relative to the original $(C - P - S + PV(X) = 0)$ 
-
-% identical payoff to $H - X$?
-% Buy a European (K, t) call option and sell a European (B + K, t) call option. Determine the payoff of this portfolio at time t. Show that this is equivalent to the payoff at time t of the European (K, t) capped call option. 
-
-% check the notebooks for thoughts
+The European capped call option pays $H - X$ for $H > X$ when $S$ exceeds $H$, $S - X$ when $S$ exceeds $X$ but not $H$, and 0 otherwise. We aim to construct a portfolio of European options with identical payoff. \\ \\
+We find that a possible portfolio of European options with identifical payoff consists of taking a long position on a European call with strike price $X$ and taking a short position on a European call with strike price $H$. We can see that this provides us with the same outcomes as the European capped call optin for the above 3 scenarios at expiry: \\ \\ 
+$S > H$: Both options are exercised. The former has payoff of $S - X$, while the latter has payoff of $S - H$, which we negate since we are taking the short position, so our total payoff is now $S - X - (S - H) = S - X - S + H = -X + H = H - X$. \\
+$X < S \leq H$: Only the former option is exercised, in which case we have a payoff of $S - X$, while the other payoff is 0 since it is now worthless. \\
+$S \leq X$: Neither option can be exercised, so we are left with payoff of 0 from both for a total of 0. \\ \\
+This shows that this portfolio as defined above will result in the same payoff as the European capped call option.
 
 }
 
