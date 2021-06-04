@@ -86,7 +86,15 @@ Value the option using a two-step binomial lattice. \\ \\
 % $= 1.051 S_0$ \\
 % $= 52.55$, which is over 50, so \\
 % \framebox[1.1\width]{\textbf{0}}
-Look below. Put in those values, and then we get \\
+We have $S = 50$, $X = 50$, $r = 0.1$, $\delta t = 0.25$, $\sigma = 0.4$. \\ \\
+The final values are as follows, from top to bot: \\
+$u^2 \cdot 50 = 1.491 \cdot 50 = 74.55$, which is a payoff of $0$ \\
+$ud \cdot 50 = 50$, which is a payoff of $0$ \\
+$d^2 \cdot 50 = 0.671 \cdot 50 = 33.550$, which is a payoff of $16.450$ \\ \\
+Our only intermediate values for option values are therefore as follows, from top to bot: \\
+$e^{-r \delta t} (p \cdot 0 + (1-p) \cdot 0) = 0$ \\
+$e^{-r \delta t} ((1-p) \cdot 16.450) = e^{-0.1 \cdot 0.25} (0.487 \cdot 16.450) = e^{-0.025} \cdot 8.011 = 0.975 \cdot 8.011 = 7.811$. The stock price at this point is $d \cdot 50 = 0.819 \cdot 50 = 40.95$, which when exercised, gives us a value of $50 - 40.95 = 9.05$, so we replace the intermediate option value here with $9.05$ rather than $7.811$. \\ \\
+Finally, we see that \\
 $e^{-r \delta t} (p \cdot 0 + (1-p) \cdot 9.05) = 0.975 \cdot (0.487) \cdot 9.05 = $ \framebox[1.1\width]{\textbf{$\sim 4.297$}}
 
 \subsection*{(c)}
@@ -99,7 +107,7 @@ $ud \cdot 50 = 50$, which is a payoff of $0$ \\
 $d^2 \cdot 50 = 0.671 \cdot 50 = 33.550$, which is a payoff of $16.450$ \\ \\
 Our only intermediate values for option values are therefore as follows, from top to bot: \\
 $e^{-r \delta t} (p \cdot 0 + (1-p) \cdot 0) = 0$ \\
-$e^{-r \delta t} ((1-p) \cdot 16.450) = e^{-0.1 \cdot 0.25} (0.487 \cdot 16.450) = e^{-0.025} \cdot 8.011 = 0.975 \cdot 8.011 = 7.811$. The stock price at this point is $d \cdot 50 = 0.819 \cdot 50 = 40.95$, which when exercised, gives us a value of $50 - 40.95 = 9.05$, so it is indeed optimal to exercise at this point at 3 months when the price decreases to this point.
+$e^{-r \delta t} ((1-p) \cdot 16.450) = e^{-0.1 \cdot 0.25} (0.487 \cdot 16.450) = e^{-0.025} \cdot 8.011 = 0.975 \cdot 8.011 = 7.811$. The stock price at this point is $d \cdot 50 = 0.819 \cdot 50 = 40.95$, which when exercised, gives us a value of $50 - 40.95 = 9.05$, so it \framebox[1.1\width]{\textbf{is indeed optimal to exercise early}} at this point at 3 months when the stock price decreases to this point.
 
 }
 
