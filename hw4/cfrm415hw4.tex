@@ -23,9 +23,36 @@
 Referring to our discussion in class, and on p 94 of Lyuu (9.3), show that \\
 $hS + B = \frac{1}{R}[(\frac{R - d}{u - d})C_u + (\frac{u - R}{u - d})C_d] $ \\ \\ 
 
+We know from the replicating portfolio that \\ 
+$hSu + RB = C_u$ \\ 
+$hSd + RB = C_d$ \\ \\
+We solve to find that \\
+$hSu + RB - hSd - RB = C_u - C_d$ \\
+$hSu - hSd = C_u - C_d$ \\
+$hS(u - d) = C_u - C_d$ \\
+$hS = \frac{C_u - C_d}{u - d}$ \\ \\
+and that \\
+$RB = C_u - hSu$ \\
+$RB = C_d - hSd$ \\
+$2RB = C_u + C_d - (\frac{C_u - C_d}{u - d})(u + d)$ \\ 
+$2RB = - (\frac{- uC_u - uC_d + dC_u + dC_d + uC_u - uC_d + dC_u - dC_d}{u - d})$ \\ 
+$2RB = - (\frac{2dC_u - 2uC_d}{u - d})$ \\ 
+$B = - (\frac{dC_u - uC_d}{(u - d)R})$ \\ 
+$B = \frac{uC_d - dC_u}{(u - d)R}$ \\ \\
+Putting this all together: \\
+$hS + B = \frac{C_u - C_d}{u - d} + \frac{uC_d - dC_u}{(u - d)R}$ \\
+$hS + B = \frac{R(C_u - C_d) + uC_d - dC_u}{(u - d)R}$ \\
+$hS + B = \frac{R(C_u - C_d) + uC_d - dC_u}{(u - d)R}$ \\
+$hS + B = \frac{1}{R}(\frac{RC_u - RC_d + uC_d - dC_u}{(u - d)})$ \\
+$hS + B = \frac{1}{R}(\frac{(R-d)C_u + (-R+u)C_d}{(u - d)})$ \\
+$hS + B = \frac{1}{R}(\frac{(R-d)C_u}{(u-d)} + \frac{(u-R)C_d}{(u - d)})$ \\
+exactly as we sought to show.
+
 \subsection*{(b)}
 
 Assuming $d < R < u$, show that $p = (\frac{R - d}{u - d})$ defines a probability measure. \\ \\
+
+We know that $u > R$, and $d = d$ and is strictly less than both $u$ and $R$. We therefore know that both $R-d$ and $u-d$ are positive, and the difference between these values will simply be the difference between $u$ and $R$. Again, since we know $u > R$, we know that the denominator will always be larger than $R$, which means that the fraction $p$ overall will be some value less than 1 and greater than 0, which means that the value $p$ will define a probability measure. 
 
 }
 
