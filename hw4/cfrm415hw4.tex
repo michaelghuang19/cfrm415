@@ -61,19 +61,43 @@ We know that $u > R$, and $d = d$ and is strictly less than both $u$ and $R$. We
 
 You need to price an American put option on a non-dividend paying stock currently worth \$50.  The strike price is also \$50.  The risk-free rate is 10\%, the time to expiration is six months, and the volatility is 40\%.
 
-% \framebox[1.1\width]{\textbf{answer}}
+
 
 \subsection*{(a)}
 
 Calculate $u$, $d$, and $p$ for a two-step binomial lattice with $\delta t = 0.25$, using the Jarrow-Rudd scheme for $u$ and $d$. \\ \\
 
+Using Black-Scholes, we have that \\
+$u = e^{\sigma \sqrt{\delta t}} = e^{0.4 \cdot 0.5} = $ \framebox[1.1\width]{\textbf{$e^{0.2}$}} \\
+$d = u^{-1} = e^{-\sigma \sqrt{\delta t}} = e^{-0.4 \cdot 0.5} = $ \framebox[1.1\width]{\textbf{$e^{-0.2}$}} \\
+Using Jarrow-Rudd, we know that \\
+$p = \frac{R - d}{u - d} = \frac{e^{r \delta t} - e^{-\sigma \sqrt{\delta t}}}{e^{\sigma \sqrt{\delta t}} - e^{-\sigma \sqrt{\delta t}}} = \frac{e^{0.1 \cdot 0.25} - e^{-0.2}}{e^{0.2} - e^{-0.2}} = $ \framebox[1.1\width]{\textbf{$\frac{e^{0.025} - e^{-0.2}}{e^{0.2} - e^{-0.2}}$}}
+
+
 \subsection*{(b)}
 
 Value the option using a two-step binomial lattice. \\ \\
 
+We know the final value for a two-step binomial lattice to be \\
+$= 2((p \cdot (1-p)) \cdot ud S_0 + u^2 p^2 S_0 + d^2 (1-p)^2 S_0$ \\
+$= 2( 0.513 \cdot  0.487) \cdot ( 1.221 \cdot  0.819) S_0 + ( 1.221)^2 \cdot ( 0.513)^2 S_0 + ( 0.819)^2 \cdot ( 0.487)^2 S_0$ \\
+$= 2(0.250) \cdot (1.000) S_0 + (1.491) \cdot (0.263) S_0 + (0.671) \cdot (0.237) S_0$ \\
+$= 0.500 S_0 + 0.392 S_0 + 0.159 S_0$ \\
+$= 1.051 S_0$ \\
+$= 52.55$, which is over 50, so \\
+\framebox[1.1\width]{\textbf{0}}
+
 \subsection*{(c)}
 
 Is it optimal to exercise this option early at any time on the lattice? If so, where? \\ \\
+We have $S = 50$, $X = 50$, $r = 0.1$, $\delta t = 0.25$, $\sigma = 0.4$. \\ \\
+The final values are as follows, from top to bot: \\
+$u^2 \cdot 50 = 1.491 \cdot 50 = 74.55$, which is a payoff of $0$ \\
+$ud \cdot 50 = 50$, which is a payoff of $0$ \\
+$d^2 \cdot 50 = 0.671 \cdot 50 = 33.550$, which is a payoff of $16.450$ \\ \\
+Our only intermediate values for option values are therefore as follows, from top to bot: \\
+$e^{-r \delta t} (p \cdot 0 + (1-p) \cdot 0) = 0$ \\
+$e^{-r \delta t} ((1-p) \cdot 16.450) = e^{-0.1 \cdot 0.25} (0.487 \cdot 16.450) = e^{-0.025} = 0.975 * 8.011 = 7.811$. The stock price at this point is $d \cdot 50 = 0.819 \cdot 50 = 40.95$, which when exercised, gives us a value of $50 - 40.95 = 9.05$, so it is indeed optimal to exercise at this point at 3 months when the price decreases to this point.
 
 }
 
