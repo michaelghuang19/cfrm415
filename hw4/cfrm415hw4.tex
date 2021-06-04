@@ -20,9 +20,6 @@
 
 \subsection*{(a)}
 
-Referring to our discussion in class, and on p 94 of Lyuu (9.3), show that \\
-$hS + B = \frac{1}{R}[(\frac{R - d}{u - d})C_u + (\frac{u - R}{u - d})C_d] $ \\ \\ 
-
 We know from the replicating portfolio that \\ 
 $hSu + RB = C_u$ \\ 
 $hSd + RB = C_d$ \\ \\
@@ -50,8 +47,6 @@ exactly as we sought to show.
 
 \subsection*{(b)}
 
-Assuming $d < R < u$, show that $p = (\frac{R - d}{u - d})$ defines a probability measure. \\ \\
-
 We know that $u > R$, and $d = d$ and is strictly less than both $u$ and $R$. We therefore know that both $R-d$ and $u-d$ are positive, and the difference between these values will simply be the difference between $u$ and $R$. Again, since we know $u > R$, we know that the denominator will always be larger than $R$, which means that the fraction $p$ overall will be some value less than 1 and greater than 0, which means that the value $p$ will define a probability measure. 
 
 }
@@ -59,13 +54,7 @@ We know that $u > R$, and $d = d$ and is strictly less than both $u$ and $R$. We
 \section*{2.}
 {\Large
 
-You need to price an American put option on a non-dividend paying stock currently worth \$50.  The strike price is also \$50.  The risk-free rate is 10\%, the time to expiration is six months, and the volatility is 40\%.
-
-
-
 \subsection*{(a)}
-
-Calculate $u$, $d$, and $p$ for a two-step binomial lattice with $\delta t = 0.25$, using the Jarrow-Rudd scheme for $u$ and $d$. \\ \\
 
 Using Black-Scholes, we have that \\
 $u = e^{\sigma \sqrt{\delta t}} = e^{0.4 \cdot 0.5} = $ \framebox[1.1\width]{\textbf{$e^{0.2}$}} \\
@@ -75,8 +64,6 @@ $p = \frac{R - d}{u - d} = \frac{e^{r \delta t} - e^{-\sigma \sqrt{\delta t}}}{e
 
 
 \subsection*{(b)}
-
-Value the option using a two-step binomial lattice. \\ \\
 
 % We know the final value for a two-step binomial lattice to be \\
 % $= 2((p \cdot (1-p)) \cdot ud S_0 + u^2 p^2 S_0 + d^2 (1-p)^2 S_0$ \\
@@ -99,7 +86,6 @@ $e^{-r \delta t} (p \cdot 0 + (1-p) \cdot 9.05) = 0.975 \cdot (0.487) \cdot 9.05
 
 \subsection*{(c)}
 
-Is it optimal to exercise this option early at any time on the lattice? If so, where? \\ \\
 We have $S = 50$, $X = 50$, $r = 0.1$, $\delta t = 0.25$, $\sigma = 0.4$. \\ \\
 The final values are as follows, from top to bot: \\
 $u^2 \cdot 50 = 1.491 \cdot 50 = 74.55$, which is a payoff of $0$ \\
