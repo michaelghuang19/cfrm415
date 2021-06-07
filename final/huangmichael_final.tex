@@ -18,55 +18,88 @@
 \section*{1.}
 {\Large 
 
-\subsection*{(a)}
+You are managing a portfolio of $n$ assets. Let $\Sigma$ be the $n \times n$ covariance matrix (positive definite, given) of asset returns, $\mu$ be the $n \times 1$ vector of expected asset returns (given), and $\omega$ represent the vector of portfolio weights. \\ \\
+You wish to find the weights tha minimize the variance for a target return. That is \\
+$min_{\omega \in \mathbb{R}^n }$ $\mathbf{\omega^T \Sigma \omega}$ \\
+$ST$ $\mathbf{\omega^T1} = 1$, and \\
+$\mathbf{\omega^T\mu} = \mu_p$ \\ \\
+Where $\mu_p \in \mathbb{R}$ is the target return (given), and $\mathbf{1} \in \mathbb{R}^n$ is a vector with 1 in each element. \\ \\
+Show that the vector of optimal weights $\mathbf{\omega}^*$ is equal to \\
+$\sigma^{-1}(\lambda_1\mathbf{1} + \lambda_2\mathbf{1})$ \\
+where $\lambda_1 = \frac{C - B\mu_p}{AC - B^2}$, $\lambda_2 = \frac{A\mu_p - B}{AC - B^2}$, and \\
+$A = \mathbf{1^T\Sigma^{-1}1}$ \\
+$B = \mathbf{1^T\Sigma^{-1}\mu}$ \\
+$C = \mathbf{\mu^T\Sigma^{-1}\mu}$ \\
 
-\begin{verbatim}
-  Text enclosed inside \texttt{verbatim}
-  environment 
-  is printed directly 
-  and all \LaTeX{} commands are ignored.
-\end{verbatim}
 
-\subsection*{(b)}
 
-\framebox[1.1\width]{\textbf{answer}}
-
+\newpage
 }
 
 \section*{2.}
 {\Large
 
+\framebox[1.1\width]{\textbf{answer}}
+
+A share of stock index fund is currently \$990, the risk-free rate is 5\%, and the dividend yield on the index is 2\%.
+
+\subsection*{(a)}
+
+Use a three-step binomial lattice (with equal time steps) to value an 18-mnoth American put option with a strike price of \$1,000 when the volatility is 20\% per annum.
+
+\subsection*{(b)}
+
+How much more is this option worth than a European option with the same market and option data?
+
+\subsection*{(c)}
+
+Suppose we chop the same time to expiration up into much smaller time steps for this binomial lattice, and we find the price for 149 time steps to 84, 150 time steps to be 85, and 151 time steps to be 86. What should we take as the option premium in this case?
 
 
+
+\newpage
 }
 
 \section*{3.}
 {\Large 
 
+\framebox[1.1\width]{\textbf{answer}}
+
+Amazon's stock price is \$3200 on Monday, 7 June 2021 (today). It pays no divdend. The current annual risk-free rate is 1\%, and the annual stock price volatility is 30\%.
+
+\subsection*{(a)}
+
+Using the Black-Scholes pricing model, and the European 30/360 day count-adjusted year fraction, what is the premium for a European call option on Amazon stock expiring on 30 June 2021 with a strike of \$3150? (You may use your 30/360-EUR function from Assignment 2)
+
+\subsection*{(b)}
+
+What is the price of an American option with the same market and product data, and the same day-count?
+
+\subsection*{(c)}
+
+What is the price of a corresponding European put option?
 
 
+
+\newpage
 }
 
 \section*{4.}
 {\Large 
 
+\framebox[1.1\width]{\textbf{answer}}
 
-
-}
-
-\section*{5.}
-{\Large 
-
-
-
-}
-
-\section*{6.}
-{\Large 
+As seen at time $T_0$ (today), the forward annuald iscount factors (trivially including $P(T_0, T_1)$) are known to be \\
+$P(T_0,T_1)=0.950, P(T_1,T_2)=0.940, P (T_2,T_3)=0.932,$ \\
+$P(T_3,T_4)=0.925, P(T_4,T_5)=0.919, P(T_5,T_6)= 0.913$ 
 
 \subsection*{(a)}
 
+Calculate the spot discount factors $P(T_0,T_2),P (T_0,T_3),P(T_0,T_4), P(T_0,T_5), P(T_0,T_6)$
+
 \subsection*{(b)}
+
+Calculate the continuous forward interest rates as seen at time $T_0$
 
 }
 
