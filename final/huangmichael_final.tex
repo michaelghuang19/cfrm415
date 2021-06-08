@@ -192,11 +192,11 @@ As we can see in the diagram, the final value is \framebox[1.1\width]{$\mathbf{\
   \includegraphics[width=120mm]{./2a_tree.png}
 \end{figure}
 
-All work was then automated in python. Note that we use $K$ rather than $X$ as the strike price here. 
+All calculations were then automated in python. Note that we use $K$ rather than $X$ as the strike price here, and $P$ as the stock price and $O$ as the option value.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=120mm]{./2a.png}
+  \includegraphics[width=120mm]{./2a_finaltree.png}
 \end{figure}
 
 \newpage
@@ -210,18 +210,17 @@ As we compare, we can see that the starting node's value differs by $\sim 85.469
   \includegraphics[width=120mm]{./2b_tree.png}
 \end{figure}
 
-All work was then automated in python. Note that we use $K$ rather than $X$ as the strike price here. 
+All calculations were then automated in python. Note that we use $K$ rather than $X$ as the strike price here, and $P$ as the stock price and $O$ as the option value.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=120mm]{./2b.png}
+  \includegraphics[width=120mm]{./2b_finaltree.png}
 \end{figure}
 
 \subsection*{(c)}
 
 % Suppose we chop the same time to expiration up into much smaller time steps for this binomial lattice, and we find the price for 149 time steps to 84, 150 time steps to be 85, and 151 time steps to be 86. What should we take as the option premium in this case? \\ \\
 
-% We note that for each time step greater, the value rises by 1. 
 % We know that for a put, the option premium = $(X - S)^+ + \text{time value}$. We note that we are deep ITM, so we can say that $P^{AM} = X - S$ since we have time value of $0$, so all that is left is $X - S = 1000 - 990 = $ \framebox[1.1\width]{$\mathbf{\$ 10}$}. 
 
 In class, we noted that at about 150 steps, we have an answer that is close enough for commercial purposes, and is a good average in between the given options. Therefore, \framebox[1.1\width]{$\mathbf{85}$} is likely a good option premium to take.

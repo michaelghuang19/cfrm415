@@ -10,7 +10,7 @@ discount = math.e ** (-0.05 * 0.5)
 s = 990
 k = 1000
 
-is_american = True
+is_american = False
 
 def main():
   price_tree = np.zeros((7, 4))
