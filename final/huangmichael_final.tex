@@ -39,10 +39,80 @@ $C = \mathbf{\mu^T\Sigma^{-1}\mu}$ \\
 \section*{2.}
 {\Large
 
-\subsection*{(a)}
-\textbf{I wrote the tree calculations out in python, so as to avoid confusing myself, and rounded to account for the floating-point error} \\
+\textbf{I wrote the tree calculations out in python, so as to avoid confusing myself, and rounded to account for the floating-point error}
 
-$S_0 = 990, r = 0.05, q = 0.02, K = 1000, \sigma = 0.20, \delta t = 0.5$, since 18 months is 1.5 years, and $1.5 / 3 = 0.5$. \\
+\begin{verbatim}
+
+import math
+import numpy as np
+
+up_p = 0.525
+down_p = 1 - up_p
+up = 1.152
+down = 0.868
+discount = math.e ** (-0.05 * 0.5)
+s = 990
+k = 1000
+
+is_american = False
+
+def main():
+  price_tree = np.zeros((7, 4))
+  payoff_tree = np.zeros((7, 4))
+
+  rows, cols = price_tree.shape
+  
+  # initialize price
+  price_tree[3][0] = s
+  
+  cur_ind_list = [3]
+  for i in range(1, cols):
+    for j in range(rows):
+      if j - 1 >= 0 and price_tree[j - 1][i - 1] != 0:
+        price_tree[j][i] = price_tree[j - 1][i - 1] * down
+      if j + 1 <= rows - 1 and price_tree[j + 1][i - 1] != 0:
+        price_tree[j][i] = price_tree[j + 1][i - 1] * up
+
+  # initialize payoffs after pricing
+  for i in np.arange(6, -1, -1):
+    if price_tree[i][3] == 0:
+      continue
+
+    if price_tree[i][3] < k:
+      payoff_tree[i][3] = k - price_tree[i][3]
+    else:
+      payoff_tree[i][3] = 0
+
+  # start traversing backwards and replace accordingly
+  for i in np.arange(cols - 2, -1, -1):
+    for j in range(1, rows - 1):
+      if price_tree[j + 1][i + 1] != 0 and price_tree[j - 1][i + 1] != 0:
+        up_factor = payoff_tree[j - 1][i + 1] * up_p
+        down_factor = payoff_tree[j + 1][i + 1] * down_p
+        payoff_tree[j][i] = discount * (up_factor + down_factor)
+      
+      if is_american:
+        # replace as necessary in american case
+        if price_tree[j][i] != 0 and 
+        payoff_tree[j][i] < (k - price_tree[j][i]):
+          payoff_tree[j][i] = k - price_tree[j][i]
+
+  # formula: discount * ((u_p * up_val) + (d_p * down_val))
+
+  print("price_tree")
+  print(price_tree)
+  print("payoff_tree")
+  print(payoff_tree)
+  
+
+if __name__ == "__main__":
+  main()
+
+\end{verbatim}
+
+\subsection*{(a)}
+
+$S_0 = 990, r = 0.05, q = 0.02, K = 1000, \sigma = 0.20, \delta t = 0.5$, since 18 months is 1.5 years, and $1.5 / 3 = 0.5$. Note that we use $K$ rather than $X$ as the strike price here. \\
 We have that \\
 $u = e^{\sigma\sqrt{\delta t}} = e^{0.2 \cdot \sqrt{0.5}} = \sim 1.152$ \\
 $d = \frac{1}{u} = e^{-\sigma\sqrt{\delta t}} = e^{-0.2 \cdot \sqrt{0.5}} = \sim 0.868$ \\
@@ -54,7 +124,7 @@ As we can see in the diagram, the final value is \framebox[1.1\width]{$\mathbf{\
   \includegraphics[width=120mm]{./2a_tree.png}
 \end{figure}
 
-All work was then automated in python.
+All work was then automated in python. Note that we use $K$ rather than $X$ as the strike price here. 
 
 \begin{figure}[h]
   \centering
@@ -72,7 +142,7 @@ As we compare, we can see that the starting node's value differs by $\sim 85.469
   \includegraphics[width=120mm]{./2b_tree.png}
 \end{figure}
 
-All work was then automated in python.
+All work was then automated in python. Note that we use $K$ rather than $X$ as the strike price here. 
 
 \begin{figure}[h]
   \centering
@@ -83,9 +153,10 @@ All work was then automated in python.
 
 \subsection*{(c)}
 
-Suppose we chop the same time to expiration up into much smaller time steps for this binomial lattice, and we find the price for 149 time steps to 84, 150 time steps to be 85, and 151 time steps to be 86. What should we take as the option premium in this case?
+Suppose we chop the same time to expiration up into much smaller time steps for this binomial lattice, and we find the price for 149 time steps to 84, 150 time steps to be 85, and 151 time steps to be 86. What should we take as the option premium in this case? \\ \\
 
-
+% We note that for each time step greater, the value rises by 1. 
+We know that for a put, the option premium = $(X - S)^+ + \text{time value}$. We note that we are deep ITM, so we can say that $P^{AM} = X - S$ since we have time value of $0$, so all that is left is $X - S = 1000 - 990 = $ \framebox[1.1\width]{$\mathbf{\$ 10}$}. 
 
 \newpage
 }
@@ -93,13 +164,40 @@ Suppose we chop the same time to expiration up into much smaller time steps for 
 \section*{3.}
 {\Large 
 
-\framebox[1.1\width]{\textbf{answer}}
-
 Amazon's stock price is \$3200 on Monday, 7 June 2021 (today). It pays no divdend. The current annual risk-free rate is 1\%, and the annual stock price volatility is 30\%.
 
 \subsection*{(a)}
 
-Using the Black-Scholes pricing model, and the European 30/360 day count-adjusted year fraction, what is the premium for a European call option on Amazon stock expiring on 30 June 2021 with a strike of \$3150? (You may use your 30/360-EUR function from Assignment 2)
+Using the Black-Scholes pricing model, and the European 30/360 day count-adjusted year fraction, what is the premium for a European call option on Amazon stock expiring on 30 June 2021 with a strike of \$3150? (You may use your 30/360-EUR function from Assignment 2) \\ \\
+
+We calculate the count-adjusted year fraction to be $0.063889$. \\
+$S = 3200, X = 3150, T-t = 0.063889, r = 0.01, \sigma = 0.30$ \\ \\
+$C(S, T) = SN(d_1) - Xe^{-r(T-t)}N(d_2)$ \\
+$d_1 = \frac{log(\frac{S}{X}) + (r+\frac{1}{2}\sigma^2)(T-t)}{\sigma\sqrt{T-t}}$ \\
+$d_2 = d_1 - \sigma\sqrt{T-t}$ \\ \\
+We use python yet again:
+\begin{verbatim}
+import math
+import numpy as np
+from scipy.stats import norm
+
+S = 3200
+X = 3150
+time = 0.063889
+r = 0.01
+sigma = 0.30
+
+d_1 = (math.log(S / X) + ((r + 0.5 * (sigma ** 2)) * (time))) / 
+(sigma * np.sqrt(time))
+d_2 = d_1 - (sigma * np.sqrt(time))
+
+call = (S * norm.cdf(d_1)) 
+- (X * (math.e ** (-r * time)) * norm.cdf(d_2))
+
+print("call")
+print(call)
+\end{verbatim}
+\framebox[1.1\width]{$\mathbf{124.23224257130119}$}
 
 \subsection*{(b)}
 
@@ -107,10 +205,30 @@ What is the price of an American option with the same market and product data, a
 
 \subsection*{(c)}
 
-What is the price of a corresponding European put option?
+We keep the same $d_1$ and $d_2$, and know that the formula for put is $P(S, t) = Xe^{-r(T - t)}N(-d_2) - SN(-d_1)$ \\
+We turn to python yet again:
+\begin{verbatim}
+import math
+import numpy as np
+from scipy.stats import norm
 
+S = 3200
+X = 3150
+time = 0.063889
+r = 0.01
+sigma = 0.30
 
+d_1 = (math.log(S / X) + ((r + 0.5 * (sigma ** 2)) * (time))) / 
+(sigma * np.sqrt(time))
+d_2 = d_1 - (sigma * np.sqrt(time))
 
+put = (X * (math.e ** (-r * time)) * norm.cdf(-d_2)) 
+- (S * norm.cdf(-d_1))
+
+print("put")
+print(put)
+\end{verbatim}
+\framebox[1.1\width]{$\mathbf{72.22038181859284}$}
 \newpage
 }
 
