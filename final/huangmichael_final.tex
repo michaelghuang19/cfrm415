@@ -18,20 +18,85 @@
 \section*{1.}
 {\Large 
 
-You are managing a portfolio of $n$ assets. Let $\Sigma$ be the $n \times n$ covariance matrix (positive definite, given) of asset returns, $\mu$ be the $n \times 1$ vector of expected asset returns (given), and $\omega$ represent the vector of portfolio weights. \\ \\
-You wish to find the weights tha minimize the variance for a target return. That is \\
-$min_{\omega \in \mathbb{R}^n }$ $\frac{1}{2}\mathbf{\omega^T \Sigma \omega}$ \\
-$ST$ $\mathbf{\omega^T1} = 1$, and \\
-$\mathbf{\omega^T\mu} = \mu_p$ \\ \\
-Where $\mu_p \in \mathbb{R}$ is the target return (given), and $\mathbf{1} \in \mathbb{R}^n$ is a vector with 1 in each element. \\ \\
-Show that the vector of optimal weights $\mathbf{\omega}^*$ is equal to \\
-$\sigma^{-1}(\lambda_1\mathbf{1} + \lambda_2\mathbf{\mu})$ \\
-where $\lambda_1 = \frac{C - B\mu_p}{AC - B^2}$, $\lambda_2 = \frac{A\mu_p - B}{AC - B^2}$, and \\
-$A = \mathbf{1^T\Sigma^{-1}1}$ \\
-$B = \mathbf{1^T\Sigma^{-1}\mu}$ \\
-$C = \mathbf{\mu^T\Sigma^{-1}\mu}$ \\
-
-
+We aim to find the minimium variance portfolio, as described. We form the matrix version of the Lagrangian, which is \\
+$\mathcal{L} (\omega, \lambda_1, \lambda_2) = f(x) + \lambda_1 g(x) + \lambda_2 h(x)$ \\
+for $g(x) = 0, h(x) = 0$. We have $f(x) = \frac{1}{2}\omega^T \Sigma \omega$, $g(x) = \omega^T 1 = 1$, and $h(x) = \omega^T \mu = \mu_p$, so we can effectively modify this equation to be \\
+$\mathcal{L} (\omega, \lambda_1, \lambda_2) = \frac{1}{2}\omega^T \Sigma \omega + \lambda_1 (1 - \omega^T 1) + \lambda_2 (\mu_p - \omega^T \mu)$ \\
+We take the derivatives, giving us the following: \\ \\
+$\frac{\partial \mathcal{L}}{\partial \omega} = \omega^T\Sigma - \lambda_1(1) - \lambda_2(\mu) = \Sigma\omega - \lambda_11 - \lambda\mu = 0$ \\ 
+$\frac{\partial \mathcal{L}}{\partial \lambda_1} = 1 - \omega^T1 = 0$ \\
+$\frac{\partial \mathcal{L}}{\partial \lambda_2} = \mu_p - \omega^T\mu = 0$ \\ \\
+We can use the first derivative we took to find that for $\omega^*$, we have \\
+$0 = \Sigma\omega^* - \lambda_11 - \lambda_2\mu$ \\
+$\lambda_11 + \lambda\mu = \Sigma\omega^*$ \\
+$\Sigma^{-1}(\lambda_11 + \lambda_2\mu) = \omega^*$ \\
+$\omega^* = \Sigma^{-1}(\lambda_11 + \lambda_2\mu)$ \\
+exactly as we sought to show. \\ \\
+To verify the values of $\lambda_1$ and $\lambda_2$, we use the latter two derivatives and substitute our solution to $\omega$: \\ \\
+$1 = \omega^T1$ \\
+$\mu_p = \omega^T\mu$ \\ \\
+$1 = (\Sigma^{-1}(\lambda_11 + \lambda_2\mu))^T1$ \\
+$\mu_p = (\Sigma^{-1}(\lambda_11 + \lambda_2\mu))^T\mu$ \\ \\
+$1 = (\lambda_1\Sigma^{-1}1 + \lambda_2\Sigma^{-1}\mu)^T1$ \\
+$\mu_p = (\lambda_1\Sigma^{-1}1 + \lambda_2\Sigma^{-1}\mu)^T\mu$ \\ \\
+$1 = (\lambda_11^T\Sigma^{-1} + \lambda_2\mu^T\Sigma^{-1})1$ \\
+$\mu_p = (\lambda_11^T\Sigma^{-1} + \lambda_2\mu^T\Sigma^{-1})\mu$ \\ \\
+$1 = \lambda_11^T\Sigma^{-1}1 + \lambda_2\mu^T\Sigma^{-1}1$ \\
+$\mu_p = \lambda_11^T\Sigma^{-1}\mu + \lambda_2\mu^T\Sigma^{-1}\mu$ \\ \\
+$1 = \lambda_11^T\Sigma^{-1}1 + \lambda_21^T\Sigma^{-1}\mu$ \hfill By property of transpose and symmetry of $\Sigma$ \\
+$\mu_p = \lambda_11^T\Sigma^{-1}\mu + \lambda_2\mu^T\Sigma^{-1}\mu$ \\ \\
+We can rearrange this as a system of equations in matrix form: \\
+$\begin{bmatrix}
+  1 \\
+  \mu_p
+\end{bmatrix}
+= 
+\begin{bmatrix}
+  A & B \\
+  B & C
+\end{bmatrix}
+\begin{bmatrix}
+  \lambda_1 \\
+  \lambda_2
+\end{bmatrix}$ \\ \\
+We can easily verify at this point that $A = 1^T\Sigma^{-1}1, B = 1^T\Sigma^{-1}u, C = \mu^T\Sigma^{-1}\mu$ as we aimed to show. We can then solve for $\lambda_1, \lambda_2$: \\ \\
+$\begin{bmatrix}
+  1 \\
+  \mu_p
+\end{bmatrix}
+= 
+\begin{bmatrix}
+  A & B \\
+  B & C
+\end{bmatrix}
+\begin{bmatrix}
+  \lambda_1 \\
+  \lambda_2
+\end{bmatrix}$ \\ \\
+$\begin{bmatrix}
+  1 \\
+  \mu_p
+\end{bmatrix}
+= 
+\begin{bmatrix}
+  \lambda_1A +\lambda_2B \\
+  \lambda_1B + \lambda_2C
+\end{bmatrix}$ \\ \\
+$1 = \lambda_1A + \lambda_2B$ \hfill Convert back to system of equations \\
+$\mu_p = \lambda_1B + \lambda_2C$ \\ \\
+$\frac{1 - \lambda_2B}{A} = \lambda_1$ \\ \\
+% $\mu_p = \lambda_1B + \lambda_2C$ \\ \\
+% $\frac{1 - \lambda_2B}{A} = \lambda_1$ \\
+$\mu_p = \frac{1 - \lambda_2B}{A}B + \lambda_2C$ \hfill Substitute $\lambda_1$ into other equation \\
+$\mu_p = \frac{B}{A} - \lambda_2\frac{B^2}{A} + \lambda_2C$ \\
+$\mu_p - \frac{B}{A} =  \lambda_2 (C - \frac{B^2}{A})$ \\ 
+$\frac{A\mu_p - B}{A} =  \lambda_2 (\frac{AC - B^2}{A})$ \\
+$\frac{A\mu_p - B}{AC - B^2} =  \lambda_2$ \\ \\
+$\frac{1 - \frac{A\mu_p - B}{AC - B^2}B}{A} =  \lambda_1$ \hfill Substitute $\lambda_2$ back into first equation \\
+$\frac{\frac{AC - B^2 - AB\mu_p + B^2}{AC - B^2}}{A} =  \lambda_1$ \\
+$\frac{\frac{AC - AB\mu_p}{AC - B^2}}{A} =  \lambda_1$ \\
+$\frac{C - B\mu_p}{AC - B^2} =  \lambda_1$ \\
+which confirms both values of $\lambda$ that we aimed to show.
 
 \newpage
 }
@@ -164,18 +229,14 @@ We know that for a put, the option premium = $(X - S)^+ + \text{time value}$. We
 \section*{3.}
 {\Large 
 
-Amazon's stock price is \$3200 on Monday, 7 June 2021 (today). It pays no divdend. The current annual risk-free rate is 1\%, and the annual stock price volatility is 30\%.
-
 \subsection*{(a)}
-
-Using the Black-Scholes pricing model, and the European 30/360 day count-adjusted year fraction, what is the premium for a European call option on Amazon stock expiring on 30 June 2021 with a strike of \$3150? (You may use your 30/360-EUR function from Assignment 2) \\ \\
 
 We calculate the count-adjusted year fraction to be $0.063889$. \\
 $S = 3200, X = 3150, T-t = 0.063889, r = 0.01, \sigma = 0.30$ \\ \\
 $C(S, T) = SN(d_1) - Xe^{-r(T-t)}N(d_2)$ \\
 $d_1 = \frac{log(\frac{S}{X}) + (r+\frac{1}{2}\sigma^2)(T-t)}{\sigma\sqrt{T-t}}$ \\
 $d_2 = d_1 - \sigma\sqrt{T-t}$ \\ \\
-We use python yet again:
+We use python to perform the raw calculations yet again:
 \begin{verbatim}
 import math
 import numpy as np
@@ -201,12 +262,12 @@ print(call)
 
 \subsection*{(b)}
 
-What is the price of an American option with the same market and product data, and the same day-count?
+By put-call parity with no dividend, we know that the American call option is always optimal to be exercised at expiry, we can say that it is the same price as the European call option, that is, \framebox[1.1\width]{$\mathbf{124.23224257130119}$}
 
 \subsection*{(c)}
 
 We keep the same $d_1$ and $d_2$, and know that the formula for put is $P(S, t) = Xe^{-r(T - t)}N(-d_2) - SN(-d_1)$ \\
-We turn to python yet again:
+We turn to python to perform the raw calculations yet again:
 \begin{verbatim}
 import math
 import numpy as np
