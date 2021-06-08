@@ -20,12 +20,12 @@
 
 You are managing a portfolio of $n$ assets. Let $\Sigma$ be the $n \times n$ covariance matrix (positive definite, given) of asset returns, $\mu$ be the $n \times 1$ vector of expected asset returns (given), and $\omega$ represent the vector of portfolio weights. \\ \\
 You wish to find the weights tha minimize the variance for a target return. That is \\
-$min_{\omega \in \mathbb{R}^n }$ $\mathbf{\omega^T \Sigma \omega}$ \\
+$min_{\omega \in \mathbb{R}^n }$ $\frac{1}{2}\mathbf{\omega^T \Sigma \omega}$ \\
 $ST$ $\mathbf{\omega^T1} = 1$, and \\
 $\mathbf{\omega^T\mu} = \mu_p$ \\ \\
 Where $\mu_p \in \mathbb{R}$ is the target return (given), and $\mathbf{1} \in \mathbb{R}^n$ is a vector with 1 in each element. \\ \\
 Show that the vector of optimal weights $\mathbf{\omega}^*$ is equal to \\
-$\sigma^{-1}(\lambda_1\mathbf{1} + \lambda_2\mathbf{1})$ \\
+$\sigma^{-1}(\lambda_1\mathbf{1} + \lambda_2\mathbf{\mu})$ \\
 where $\lambda_1 = \frac{C - B\mu_p}{AC - B^2}$, $\lambda_2 = \frac{A\mu_p - B}{AC - B^2}$, and \\
 $A = \mathbf{1^T\Sigma^{-1}1}$ \\
 $B = \mathbf{1^T\Sigma^{-1}\mu}$ \\
@@ -87,19 +87,25 @@ What is the price of a corresponding European put option?
 \section*{4.}
 {\Large 
 
-\framebox[1.1\width]{\textbf{answer}}
-
-As seen at time $T_0$ (today), the forward annuald iscount factors (trivially including $P(T_0, T_1)$) are known to be \\
-$P(T_0,T_1)=0.950, P(T_1,T_2)=0.940, P (T_2,T_3)=0.932,$ \\
-$P(T_3,T_4)=0.925, P(T_4,T_5)=0.919, P(T_5,T_6)= 0.913$ 
-
 \subsection*{(a)}
-
-Calculate the spot discount factors $P(T_0,T_2),P (T_0,T_3),P(T_0,T_4), P(T_0,T_5), P(T_0,T_6)$
+We know that with $t_0 = 0$, $P(t, T) = P(0, T) / P(0, t)$, or that \\
+$P(0, T) = P(t, T) \cdot P(0, t)$: \\ \\
+$P(T_0, T_2) = P(T_1, T_2) \cdot P(T_0, T_1) = 0.940 \cdot 0.950 = $ \framebox[1.1\width]{$\mathbf{0.893}$} \\ 
+$P (T_0, T_3) = P(T_2, T_3) \cdot P(T_0, T_2) = 0.932 \cdot 0.893 = $ \framebox[1.1\width]{$\mathbf{0.832276}$} \\
+$P(T_0, T_4) = P(T_3, T_4) \cdot P(T_0, T_3) = 0.925 \cdot 0.832276 = $ \framebox[1.1\width]{$\mathbf{0.7698553}$} \\
+$P(T_0, T_5) = P(T_4, T_5) \cdot P(T_0, T_4) = 0.919 \cdot 0.7698553 = $ \framebox[1.1\width]{$\mathbf{0.7074970207}$} \\
+$P(T_0, T_6) = P(T_5, T_6) \cdot P(T_0, T_5) = 0.913 \cdot 0.7074970207 =  $ \framebox[1.1\width]{$\mathbf{0.64594477989}$}
 
 \subsection*{(b)}
 
-Calculate the continuous forward interest rates as seen at time $T_0$
+Since each discount rate is annual, we know that the year-count difference between any two adjacent $T_i$ is 1, and adapt this accordingly between $T_0$ and $T_i$: \\ $R(t, T) := -ln(P(t, T)) / \tau(t, T)$ \\ \\
+$R(T_0, T_1) = -ln(P(T_0, T_1)) / \tau(T_0, T_1) = -ln(0.950) / 1 = $ \framebox[1.1\width]{$\mathbf{0.05129329438}$} \\
+$R(T_0, T_2) = -ln(P(T_0, T_2)) / \tau(T_0, T_2) = -ln(0.893) / 2 = $ \framebox[1.1\width]{$\mathbf{0.05658434905}$} \\
+$R(T_0, T_3) = -ln(P(T_0, T_3)) / \tau(T_0, T_3) = -ln(0.832276) / 3 = $ \framebox[1.1\width]{$\mathbf{0.06119705413}$} \\
+$R(T_0, T_4) = -ln(P(T_0, T_4)) / \tau(T_0, T_4) = -ln(0.7698553) / 4 = $ \framebox[1.1\width]{$\mathbf{0.06538817596}$} \\
+$R(T_0, T_5) = -ln(P(T_0, T_5)) / \tau(T_0, T_5) = -ln(0.7074970207) / 5 = $ \framebox[1.1\width]{$\mathbf{0.06920437209}$} \\
+$R(T_0, T_6) = -ln(P(T_0, T_6)) / \tau(T_0, T_6) = -ln(0.64594477989) / 6 = $ \framebox[1.1\width]{$\mathbf{0.07284020981}$} \\
+
 
 }
 
