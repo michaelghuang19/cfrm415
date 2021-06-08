@@ -10,7 +10,7 @@ discount = math.e ** (-0.05 * 0.5)
 s = 990
 k = 1000
 
-is_american = False
+is_american = True
 
 def main():
   price_tree = np.zeros((7, 4))
@@ -49,8 +49,10 @@ def main():
       
       if is_american:
         # replace as necessary in american case
-        if price_tree[j][i] != 0 and payoff_tree[j][i] < (k - price_tree[j][i]):
-          payoff_tree[j][i] = k - price_tree[j][i]
+        exercise = k - price_tree[j][i]
+        if price_tree[j][i] != 0 and payoff_tree[j][i] < exercise:
+          print("crossed out " + str(payoff_tree[j][i]) + " for " + str(exercise))
+          payoff_tree[j][i] = exercise
 
   # formula: discount * ((u_p * up_val) + (d_p * down_val))
 

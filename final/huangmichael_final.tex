@@ -119,7 +119,7 @@ discount = math.e ** (-0.05 * 0.5)
 s = 990
 k = 1000
 
-is_american = False
+is_american = True
 
 def main():
   price_tree = np.zeros((7, 4))
@@ -158,9 +158,10 @@ def main():
       
       if is_american:
         # replace as necessary in american case
-        if price_tree[j][i] != 0 and 
-        payoff_tree[j][i] < (k - price_tree[j][i]):
-          payoff_tree[j][i] = k - price_tree[j][i]
+        exercise = k - price_tree[j][i]
+        if price_tree[j][i] != 0 and payoff_tree[j][i] < exercise:
+          print("crossed out " + str(payoff_tree[j][i]) + " for " + str(exercise))
+          payoff_tree[j][i] = exercise
 
   # formula: discount * ((u_p * up_val) + (d_p * down_val))
 
@@ -174,6 +175,8 @@ if __name__ == "__main__":
   main()
 
 \end{verbatim}
+
+\newpage
 
 \subsection*{(a)}
 
@@ -214,14 +217,14 @@ All work was then automated in python. Note that we use $K$ rather than $X$ as t
   \includegraphics[width=120mm]{./2b.png}
 \end{figure}
 
-\newpage
-
 \subsection*{(c)}
 
-Suppose we chop the same time to expiration up into much smaller time steps for this binomial lattice, and we find the price for 149 time steps to 84, 150 time steps to be 85, and 151 time steps to be 86. What should we take as the option premium in this case? \\ \\
+% Suppose we chop the same time to expiration up into much smaller time steps for this binomial lattice, and we find the price for 149 time steps to 84, 150 time steps to be 85, and 151 time steps to be 86. What should we take as the option premium in this case? \\ \\
 
 % We note that for each time step greater, the value rises by 1. 
-We know that for a put, the option premium = $(X - S)^+ + \text{time value}$. We note that we are deep ITM, so we can say that $P^{AM} = X - S$ since we have time value of $0$, so all that is left is $X - S = 1000 - 990 = $ \framebox[1.1\width]{$\mathbf{\$ 10}$}. 
+% We know that for a put, the option premium = $(X - S)^+ + \text{time value}$. We note that we are deep ITM, so we can say that $P^{AM} = X - S$ since we have time value of $0$, so all that is left is $X - S = 1000 - 990 = $ \framebox[1.1\width]{$\mathbf{\$ 10}$}. 
+
+In class, we noted that at about 150 steps, we have an answer that is close enough for commercial purposes, and is a good average in between the given options. Therefore, \framebox[1.1\width]{$\mathbf{85}$} is likely a good option premium to take.
 
 \newpage
 }
@@ -262,7 +265,7 @@ print(call)
 
 \subsection*{(b)}
 
-By put-call parity with no dividend, we know that the American call option is always optimal to be exercised at expiry, we can say that it is the same price as the European call option, that is, \framebox[1.1\width]{$\mathbf{124.23224257130119}$}
+Via put-call parity with no dividend, we know that it is never optimal to exercise an American call option, i.e. it is best to close the position rather than exercise, which means that we can say that it has the same price as the European call option, that is, \framebox[1.1\width]{$\mathbf{124.23224257130119}$}
 
 \subsection*{(c)}
 
